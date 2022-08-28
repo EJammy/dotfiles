@@ -10,3 +10,7 @@ zstyle :compinstall filename '/home/connorcc/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+
+source ~/.config/_alias.sh
+eval "$(starship init zsh)"
