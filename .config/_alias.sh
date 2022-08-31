@@ -19,23 +19,25 @@ alias dotgit='git --work-tree=$HOME --git-dir=$HOME/.dotfiles-git'
 
 trash()
 {
-	cfast foo
+	# WIP
 }
 
-autocommit()
+gitauto()
 {
-	git status || return
+	gitcmd='git'
+	[ $# -eq 1 ] && gitcmd="eval $1"
+	cmd=( ${=gitcmd} )
+	$cmd status || return
 	echo -n "Commit and push changes? [y/n]: "
 	read REPLY
 	echo    # (optional) move to a new line
 
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		git add . && git commit -am "Auto commit on $(date --utc +'%c')" && git push
+		$cmd add . && $cmd commit -am "Auto commit on $(date --utc +'%c')" && git push
 	else
 		echo "No action"
 	fi
 }
-
 
 mkcd()
 {
