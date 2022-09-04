@@ -19,6 +19,22 @@ vim.api.nvim_set_keymap('n', '<space>lc', '<cmd>lua vim.lsp.buf.code_action()<CR
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {})
 vim.api.nvim_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {})
 
+-- setup luasnip
+vim.cmd([[
+" press <Tab> to expand or jump in a snippet. These can also be mapped separately
+" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+" -1 for jumping backwards.
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+]])
+
 -- Setup nvim-cmp. (copied from doc)
 local cmp = require'cmp'
 
@@ -26,8 +42,8 @@ cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-			-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+			-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
 			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
@@ -41,16 +57,16 @@ cmp.setup({
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.abort(),
-		['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' },
-		{ name = 'vsnip' }, -- For vsnip users.
-		-- { name = 'luasnip' }, -- For luasnip users.
+		-- { name = 'vsnip' }, -- For vsnip users.
+		{ name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
-		{ name = 'buffer' },
+		-- { name = 'buffer' },
 	})
 })
 
@@ -90,6 +106,7 @@ local lua_workspace = { vim.fn.getcwd() }
 -- end
 
 -- check :help lspconfig-server-configurations
+-- check ~/.local/share/nvim/site/pack/packer/start
 local lsp_settings = {
 	sumneko_lua = {
 		Lua = {
@@ -117,6 +134,9 @@ local lsp_settings = {
 	},
 	clangd = {},
 	pyright = {},
+	texlab = {},
+
+	-- use rust plugin instead?
 	-- rust_analyzer = {
 	--     ["rust-analyzer"] = {
 	--         server = {
