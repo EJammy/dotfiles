@@ -1,7 +1,6 @@
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {})
-vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {})
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {}) vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {})
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {})
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.implementation()<CR>', {})
 vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {})
@@ -102,7 +101,7 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function (fallback)
 			local luasnip = require("luasnip")
 			if cmp.visible() then
-				cmp.select_previous_item()
+				cmp.select_prev_item()
 			-- elseif luasnip.jumpable(-1) then
 			--     luasnip.jump(-1)
 			else
@@ -169,13 +168,16 @@ local lsp_settings = {
 			},
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
-				globals = {'vim'},
+				globals = {'vim', 'awesome'},
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
 				-- library = vim.api.nvim_get_runtime_file("", true)
-				-- library = vim.fn.getcwd(),
-				library = lua_workspace
+				-- library = lua_workspace
+				library = {
+					vim.fn.getcwd(),
+					'/usr/share/awesome/lib',
+				}
 			},
 			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {
@@ -186,6 +188,7 @@ local lsp_settings = {
 	clangd = {},
 	pyright = {},
 	texlab = {},
+	csharp_ls = {}
 
 	-- use rust plugin instead?
 	-- rust_analyzer = {
