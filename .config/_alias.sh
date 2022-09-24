@@ -16,6 +16,8 @@ alias mv='mv -iv'
 alias cp='cp -iv'
 
 alias dotgit='git --work-tree=$HOME --git-dir=$HOME/.dotfiles-git'
+alias g='git'
+
 
 trash()
 {
@@ -45,5 +47,10 @@ mkcd()
 	mkdir $1 && cd $1
 }
 
-ssh_mc_server=167.99.31.53
+add-alias()
+{
+	echo alias $1=\"$2\" >> ~/.config/_alias.sh
+	source ~/.config/_alias.sh
+}
 
+alias venv-start="source .venv/bin/activate"
