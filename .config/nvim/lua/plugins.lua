@@ -20,8 +20,7 @@ if not vim.g.vscode then
 
 	use {
 		'folke/which-key.nvim',
-		config = function()
-			require("which-key").setup{}
+		config = function() require("which-key").setup{}
 		end
 	}
 
@@ -47,6 +46,9 @@ if not vim.g.vscode then
 	use 'hrsh7th/cmp-path'
 	use 'hrsh7th/cmp-cmdline'
 	use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-nvim-lsp-signature-help'
+
+	use { 'Issafalcon/lsp-overloads.nvim'}
 
 	-- use 'hrsh7th/cmp-vsnip'
 	-- use 'hrsh7th/vim-vsnip'
@@ -56,6 +58,7 @@ if not vim.g.vscode then
 	--
 	-- ray-x/lsp_signature.nvim
 	use 'simrat39/rust-tools.nvim'
+	-- use 'OmniSharp/omnisharp-vim'
 
 	-- use {'neoclide/coc.nvim', branch = 'release'}
 

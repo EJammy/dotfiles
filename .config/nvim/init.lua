@@ -44,7 +44,9 @@ local options = {
 	shiftwidth = 0, -- use value from tabstop
 	smarttab = true,
 	ignorecase = true,
+
 	-- expandtab,
+	-- expandtab = true,
 
 	-- enable mouse
 	mouse = 'a',
@@ -70,6 +72,9 @@ local options = {
 
 	-- fix colors
 	termguicolors = true,
+
+	-- fold method
+	foldmethod = 'syntax'
 }
 
 for _, i in pairs(options) do
