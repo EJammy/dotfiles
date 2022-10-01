@@ -49,16 +49,20 @@ if not vim.g.vscode then
 	use 'hrsh7th/cmp-nvim-lsp-signature-help'
 
 	use { 'Issafalcon/lsp-overloads.nvim'}
+	-- ray-x/lsp_signature.nvim
+
+	use 'wellle/context.vim'
+	-- use 'nvim-treesitter/nvim-treesitter'
+	-- use 'nvim-treesitter/nvim-treesitter-context'
 
 	-- use 'hrsh7th/cmp-vsnip'
 	-- use 'hrsh7th/vim-vsnip'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
 
-	--
-	-- ray-x/lsp_signature.nvim
 	use 'simrat39/rust-tools.nvim'
 	-- use 'OmniSharp/omnisharp-vim'
+	use 'folke/lua-dev.nvim'
 
 	-- use {'neoclide/coc.nvim', branch = 'release'}
 

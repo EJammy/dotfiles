@@ -1,6 +1,7 @@
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {}) vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {})
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {})
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {})
 vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {})
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.implementation()<CR>', {})
 vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {})
@@ -179,10 +180,11 @@ local lsp_settings = {
 				-- Make the server aware of Neovim runtime files
 				-- library = vim.api.nvim_get_runtime_file("", true)
 				-- library = lua_workspace
-				library = {
-					vim.fn.getcwd(),
-					'/usr/share/awesome/lib',
-				}
+				library = vim.api.nvim_get_runtime_file("", true);
+				-- {
+				--     vim.fn.getcwd(),
+				--     '/usr/share/awesome/lib',
+				-- }
 			},
 			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {

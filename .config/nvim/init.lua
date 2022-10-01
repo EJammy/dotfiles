@@ -1,25 +1,18 @@
 -- TODO:
--- undo dir
--- which-key for nvim-tree customize plugins
+-- change undo dir
+-- which-key for nvim-tree?
+-- vim wiki
+-- check preconfigured configs
+-- check gh stars
 --
 -- util = require 'utils'
 
--- plan: put everythin in one file, then seperate
-
 -- path for syncing vimwiki
 
---  installation notes:
---  set g:gdrive_path for path to google drive (for vim wiki)
 -- 
---  hint: gf to go to file, /-->
--- 
---  TODO:
 --  https://github.com/nanotee/nvim-lua-guide
 --  TOC?
--- 	fix for windows
--- 	compiling
--- 	set scripts for installing dotfiles
--- 	tree (Nerdtree or Fern)
+-- 	different os
 -- 	telescope, startup screen
 -- 	<cmd>
 -- 
@@ -28,6 +21,12 @@
 --  if empty(glob('~/tmp'))
 --      silent !mkdir ~/tmp
 --  endif
+
+--  installation notes:
+--  [WIP]
+--  set g:gdrive_path for path to google drive (for vim wiki)
+-- 
+--  hint: gf to go to file, /-->
 
 require 'plugins'
 
@@ -223,3 +222,4 @@ end
 
 -- require'nvim-tree'.setup()
 -- require'feline'.setup()
+

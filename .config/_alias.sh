@@ -35,7 +35,7 @@ gitauto()
 	echo    # (optional) move to a new line
 
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		$cmd add . && $cmd commit -am "Auto commit on $(date --utc +'%c')" && git push
+		$cmd commit -am "Auto commit on $(date --utc +'%c')" && git push
 	else
 		echo "No action"
 	fi
@@ -54,3 +54,4 @@ add-alias()
 }
 
 alias venv-start="source .venv/bin/activate"
+alias py="python"
