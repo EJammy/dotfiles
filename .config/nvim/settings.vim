@@ -101,15 +101,16 @@ let g:tokyonight_enable_italic = 0
 colorscheme tokyonight
 " colorscheme onedark
 " colorscheme PaperColor
+" colorscheme catppuccin
 
 " note: background color of tokyonight is #a1a6df
-let g:PaperColor_Theme_Options = {
-			\   'theme': {
-			\     'default': {
-			\       'transparent_background': 1
-			\     }
-			\   }
-			\ }
+" let g:PaperColor_Theme_Options = {
+"             \   'theme': {
+"             \     'default': {
+"             \       'transparent_background': 1
+"             \     }
+"             \   }
+"             \ }
 
 func! SetTransparentBackground(val)
 	let g:PaperColor_Theme_Options.theme.default.transparent_background = a:val

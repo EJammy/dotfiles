@@ -73,6 +73,16 @@ if not vim.g.vscode then
 	use 'ghifarit53/tokyonight-vim'
 	use 'cocopon/iceberg.vim'
 	use 'drewtempelmeyer/palenight.vim'
+
+	use {
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = function()
+			vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
+			require("catppuccin").setup()
+			-- vim.api.nvim_command "colorscheme catppuccin"
+		end
+	}
 end
 
 

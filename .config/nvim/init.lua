@@ -223,3 +223,5 @@ end
 -- require'nvim-tree'.setup()
 -- require'feline'.setup()
 
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/' .. 'local.vim')
+

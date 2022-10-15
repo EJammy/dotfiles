@@ -33,9 +33,9 @@ bindkey '^x^e' edit-command-line
 
 
 source ~/.config/_alias.sh
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 
 # TODO: detect terminal and switch prompt accordingly
-# autoload -Uz promptinit
-# promptinit
-# promptfire
+autoload -Uz promptinit
+promptinit
+prompt fire
