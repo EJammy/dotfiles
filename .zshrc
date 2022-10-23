@@ -36,6 +36,6 @@ source ~/.config/_alias.sh
 # eval "$(starship init zsh)"
 
 # TODO: detect terminal and switch prompt accordingly
-autoload -Uz promptinit
-promptinit
-prompt fire
+# autoload -Uz promptinit
+# promptinit
+# prompt fire
