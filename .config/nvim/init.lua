@@ -23,7 +23,6 @@ local function reload_config()
         'options',
         'plugins-setup',
         'init-lsp',
-        'options',
         'keymaps',
     }
     -- vim.cmd [[ set all& ]]
@@ -38,10 +37,11 @@ local function reload_plugins()
     vim.cmd [[ PackerSync ]]
 end
 
+vim.g.mapleader = ' '
+
 vim.keymap.set('n', ' r1', reload_config)
 vim.keymap.set('n', ' r2', reload_plugins)
 
-require 'options'
 require 'plugins-setup'
 require 'init-lsp'
 require 'options'
@@ -75,6 +75,12 @@ function Toggle_term(termname)
 		vim.opt.buflisted = false
 	end
 end
+
+vim.keymap.set('t', '<c-w>', '<c-\\><c-n><c-w>')
+vim.keymap.set('t', 'fd', '<c-\\><c-n>')
+
+vim.cmd('au BufWinEnter,WinEnter term://* startinsert')
+vim.cmd('au BufWinEnter,WinEnter toggle_term startinsert')
 
 vim.api.nvim_set_keymap('n', '<leader>wt', '<cmd>lua Toggle_term("toggle_term")<cr>', {})
 vim.api.nvim_set_keymap('t', '<leader>wt', '<cmd>lua Toggle_term("toggle_term")<cr>', {})

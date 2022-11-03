@@ -10,7 +10,7 @@ ExecStart=/usr/bin/rclone mount \
 	--vfs-write-back 5m \
 	--vfs-cache-max-size 5G \
 	--vfs-cache-max-age 24h0m0s \
-	gdrive-home:Files %h/Files
+	gdrive:Files %h/Files
 ExecStop=/bin/fusermount -u %h/File
 Restart=always
 RestartSec=30

@@ -22,7 +22,7 @@ local options = {
     wrapscan = false,
 
     -- don't wrap lines
-    -- wrap = false,
+    wrap = false,
 
     scrolloff = 4,
     undofile = true,
