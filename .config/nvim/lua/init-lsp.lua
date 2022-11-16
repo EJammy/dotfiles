@@ -1,5 +1,3 @@
-print('foo')
-
 ---- Copied from :h lspconfig-keybindings
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

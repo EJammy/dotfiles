@@ -72,6 +72,7 @@ require('packer').startup(function(use)
     -- File specific
     use 'folke/neodev.nvim'
     use 'lervag/vimtex'
+    use 'frazrepo/vim-rainbow'
 	-- use 'simrat39/rust-tools.nvim'
 
 end)
@@ -121,6 +122,10 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " want another compiler backend, you can change it as follows. The list of
 " supported backends and further explanation is provided in the documentation,
 " see ":help vimtex-compiler".
-let g:vimtex_compiler_method = 'latexrun'
+" let g:vimtex_compiler_method = 'latexrun'
 
+]]
+
+vim.cmd[[
+au FileType scheme call rainbow#load()
 ]]
