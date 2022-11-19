@@ -20,3 +20,4 @@ install .config/systemd/user/_rclone-mount.service
 install .gitconfig
 
 install .config/_alias.sh
+install .config/alacritty.yml
