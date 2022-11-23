@@ -64,7 +64,9 @@ require('packer').startup(function(use)
         as = "catppuccin",
         config = function()
             vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
-            require("catppuccin").setup()
+            require("catppuccin").setup({
+                transparent_background = false,
+            })
             vim.api.nvim_command "colorscheme catppuccin"
         end
     }
