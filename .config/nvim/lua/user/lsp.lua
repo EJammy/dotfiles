@@ -118,10 +118,8 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
+-- :h lspconfig-all
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- require('lspconfig')[%YOUR_LSP_SERVER%].setup {
---   capabilities = capabilities
--- }
 
 local lsp_servers = {
 	clangd = {},

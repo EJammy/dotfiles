@@ -1,6 +1,7 @@
 local map_key = vim.keymap.set
 
-map_key('n', '<m-;>', ':lua ')
+-- map_key('n', '<cr>', ':')
+map_key('n', '<m-;>', ':lua =')
 map_key('n', '<m-cr>', ':lua ')
 
 map_key('n', '<c-s>', '<cmd>w<cr>')

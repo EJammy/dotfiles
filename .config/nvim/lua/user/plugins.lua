@@ -42,7 +42,6 @@ require('packer').startup(function(use)
     -- LSP, snippet, and autocomplete
     use 'neovim/nvim-lspconfig'
     use 'nvim-tree/nvim-tree.lua'
-    use 'neovim/nvim-lspconfig'
 
     use 'hrsh7th/nvim-cmp'
 
@@ -63,7 +62,7 @@ require('packer').startup(function(use)
         "catppuccin/nvim",
         as = "catppuccin",
         config = function()
-            vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
+            vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
             require("catppuccin").setup({
                 transparent_background = false,
             })
@@ -79,9 +78,14 @@ require('packer').startup(function(use)
 
 end)
 
+require("neodev").setup({
+    -- add any options here, or leave empty to use the default settings
+})
+
 require("nvim-tree").setup({
     filters = {
         dotfiles = true,
+        -- Unity meta files
         custom = {'.\\+.meta'},
     },
 })
