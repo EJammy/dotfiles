@@ -35,9 +35,14 @@ map_key('v', '<c-_>', '<plug>(comment_toggle_linewise_visual)')
 -- map_key('n', '<c-k>', '<c-o>', {})
 -- map_key('n', '<c-j>', '<c-i>', {})
 
--- local function toggle_line_number()
---     vim.o
--- end
+local function toggle_func(fn, default)
+    local opt = true
+    if default == nil then opt = default end
+    return function ()
+        opt = not opt
+        fn(opt)
+    end
+end
 
 vim.g.mapleader = ' '
 
@@ -80,6 +85,7 @@ local leader_keymaps = {
 
     ql1 = function() vim.diagnostic.config({ virtual_text = false }) end,
     ql2 = function() vim.diagnostic.config({ virtual_text = true }) end,
+    qll = toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end),
 
     qw = function() vim.o.wrap = not vim.o.wrap end,
 }

@@ -19,15 +19,9 @@
 -- http://neovimcraft.com
 
 local function reload_config()
-    local modules = {
-        'options',
-        'plugins-setup',
-        'init-lsp',
-        'keymaps',
-    }
     -- vim.cmd [[ set all& ]]
-    for _, module in ipairs(modules) do
-        package.loaded[module] = nil
+    for key, _ in pairs(package.loaded) do
+        package.loaded[key] = nil
     end
     dofile(vim.fn.stdpath('config') .. '/init.lua')
 end
@@ -42,10 +36,10 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', ' r1', reload_config)
 vim.keymap.set('n', ' r2', reload_plugins)
 
-require 'plugins-setup'
-require 'init-lsp'
-require 'options'
-require 'keymaps'
+require 'user.lsp'
+require 'user.plugins'
+require 'user.options'
+require 'user.keymaps'
 
 local function open_snippet()
 	vim.cmd('e ~/.config/nvim/snippets/' .. vim.bo.filetype .. '.snippets')

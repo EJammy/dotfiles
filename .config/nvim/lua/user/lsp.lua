@@ -9,6 +9,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -29,6 +30,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ll', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
+
     vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<f2>', vim.lsp.buf.rename, bufopts)
@@ -89,7 +91,7 @@ cmp.setup({
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp' },
     -- { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
+    { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'snippy' }, -- For snippy users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
   }, {
