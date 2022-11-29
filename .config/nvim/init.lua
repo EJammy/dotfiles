@@ -2,8 +2,9 @@
 -- Which-key
 --  bug report: terminal mode
 --  disable all insert mode maps
---  neodev??
+-- neodev??
 -- cmp mappings good?
+-- cmp documentations
 --
 -- which-key for nvim-tree?
 -- git blame

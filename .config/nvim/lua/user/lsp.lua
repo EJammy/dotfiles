@@ -7,6 +7,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+vim.keymap.set('n', '<space>l<space>', vim.diagnostic.open_float, opts)
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 ---@diagnostic disable-next-line: unused-local
@@ -38,14 +40,14 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>lc', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-
-    vim.api.nvim_set_keymap('n', '<space>l<space>', '<cmd>lua vim.diagnostic.open_float()<CR>', {})
 end
 
 ---- :h cmp-usage
 local cmp = require'cmp'
 local luasnip = require("luasnip")
+
+vim.keymap.set({'i', 's'}, '<c-l>', function() luasnip.jump(1) end)
+vim.keymap.set({'i', 's'}, '<c-h>', function() luasnip.jump(-1) end)
 
 -- Global setup.
 cmp.setup({
@@ -58,42 +60,57 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
+  -- mapping = cmp.mapping.preset.insert({
+  mapping = {
+    ['<Down>'] = {
+      i = cmp.mapping.select_next_item({ behavior = 'select' }),
+    },
+    ['<Up>'] = {
+      i = cmp.mapping.select_prev_item({ behavior = 'select' }),
+    },
+
+    -- require('cmp.types').cmp.SelectBehavior.Select
+    ['<c-n>'] = cmp.mapping.select_next_item(),
+    ['<c-p>'] = cmp.mapping.select_prev_item(),
+
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-Space>'] = cmp.mapping(function(fallback)
+        if not cmp.visible() then
+            cmp.complete()
+        else
+            cmp.confirm({ select = true })
+        end
+    end),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
+        if luasnip.expandable() then
+            luasnip.expand({})
+        elseif cmp.visible() then
+            cmp.confirm({ select = true })
+        else
+            fallback()
+        end
     end, { "i", "s" }),
 
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
+    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
+  },
+
   sources = cmp.config.sources({
-    { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' },
     { name = 'nvim_lsp' },
-    -- { name = 'vsnip' }, -- For vsnip users.
-    { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'snippy' }, -- For snippy users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
+    { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'buffer' },
   })
