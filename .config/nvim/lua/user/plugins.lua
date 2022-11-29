@@ -21,23 +21,23 @@ require('packer').startup(function(use)
         end
     }
 
-	use {
-		'folke/which-key.nvim',
-		config = function() require("which-key").setup{}
-		end
-	}
+    use {
+        'folke/which-key.nvim',
+        config = function() require("which-key").setup{}
+        end
+    }
 
-	use 'nvim-treesitter/nvim-treesitter'
-	use 'nvim-treesitter/nvim-treesitter-context'
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-context'
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
 
     use 'simrat39/symbols-outline.nvim'
     -- use 'stevearc/aerial.nvim'
 
-	-- peek register
-	-- use 'junegunn/vim-peekaboo'
+    -- peek register
+    -- use 'junegunn/vim-peekaboo'
 
-	-- use 'vimwiki/vimwiki'
+    -- use 'vimwiki/vimwiki'
 
     -- LSP, snippet, and autocomplete
     use 'neovim/nvim-lspconfig'
@@ -50,9 +50,9 @@ require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-cmdline'
     -- use 'hrsh7th/cmp-cmdline'
-	-- use 'hrsh7th/cmp-buffer'
+    -- use 'hrsh7th/cmp-buffer'
 
-	-- use { 'Issafalcon/lsp-overloads.nvim'}
+    -- use { 'Issafalcon/lsp-overloads.nvim'}
 
     use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
     use 'saadparwaiz1/cmp_luasnip'
@@ -74,7 +74,7 @@ require('packer').startup(function(use)
     use 'folke/neodev.nvim'
     use 'lervag/vimtex'
     use 'frazrepo/vim-rainbow'
-	-- use 'simrat39/rust-tools.nvim'
+    -- use 'simrat39/rust-tools.nvim'
 
 end)
 
@@ -93,8 +93,8 @@ require("nvim-tree").setup({
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.api.nvim_create_autocmd({'BufWritePost'}, {
-	pattern = {'*.snippets'},
-	callback = require("luasnip.loaders.from_snipmate").lazy_load,
+    pattern = {'*.snippets'},
+    callback = require("luasnip.loaders.from_snipmate").lazy_load,
 })
 
 vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin{} end)

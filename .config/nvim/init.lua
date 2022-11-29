@@ -50,6 +50,7 @@ vim.keymap.set('n', ' r1', reload_config)
 vim.keymap.set('n', ' r2', reload_plugins)
 
 require 'user.lsp'
+require 'user.lsp-config'
 require 'user.plugins'
 require 'user.options'
 require 'user.keymaps'
