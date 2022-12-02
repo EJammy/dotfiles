@@ -67,7 +67,7 @@ local leader_keymaps = {
     -- clear highlights
     h = '<cmd>nohls<cr>',
 
-    cc = (function()
+    qc = (function()
         local cur = 1
         return function()
             local opt = {'latte', 'mocha'}
@@ -89,6 +89,7 @@ local leader_keymaps = {
     qll = toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end),
 
     qw = function() vim.o.wrap = not vim.o.wrap end,
+    c = '<cmd>ccl<cr>',
 }
 
 

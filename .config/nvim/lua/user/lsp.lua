@@ -13,6 +13,11 @@ vim.keymap.set('n', '<space>l<space>', vim.diagnostic.open_float, opts)
 -- after the language server attaches to the current buffer
 ---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
+    --- Guard against servers without the signatureHelper capability
+    if client.server_capabilities.signatureHelpProvider then
+        require('lsp-overloads').setup(client, { })
+    end
+
     -- Enable completion triggered by <c-x><c-o>
     -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -110,7 +115,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
+    -- { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'buffer' },
   })

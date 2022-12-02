@@ -47,12 +47,12 @@ require('packer').startup(function(use)
 
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-cmdline'
     -- use 'hrsh7th/cmp-cmdline'
     -- use 'hrsh7th/cmp-buffer'
 
-    -- use { 'Issafalcon/lsp-overloads.nvim'}
+    use { 'Issafalcon/lsp-overloads.nvim'}
 
     use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
     use 'saadparwaiz1/cmp_luasnip'
@@ -74,9 +74,11 @@ require('packer').startup(function(use)
     use 'folke/neodev.nvim'
     use 'lervag/vimtex'
     use 'frazrepo/vim-rainbow'
-    -- use 'simrat39/rust-tools.nvim'
+    use 'simrat39/rust-tools.nvim'
 
 end)
+
+require("rust-tools").setup()
 
 require("neodev").setup({
     -- add any options here, or leave empty to use the default settings
