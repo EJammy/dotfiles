@@ -12,12 +12,15 @@ map_key('!', '<c-s>', '<cmd>w<cr>')
 -- map_key('!', 'qq', '(')
 -- map_key('!', 'ww', ')')
 
-map_key('!', 'zz', '\'')
-map_key('!', 'xx', '\"')
+-- map_key('!', 'zz', '\'')
+-- map_key('!', 'xx', '\"')
 
 map_key('!', 'fd', '<esc>')
 map_key('!', 'jk', '<esc>')
 map_key('!', 'kj', '<esc>')
+
+map_key('', 'L', '$')
+map_key('', 'H', '^')
 
 -- map_key('', '<c-n>', '5j')
 -- map_key('', '<c-p>', '5k')
