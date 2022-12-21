@@ -2,8 +2,11 @@
 	email = connorc0627@gmail.com
 	name = Connor Chang
 [alias]
-	gr1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	gr1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''		   %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 	gr2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    co = checkout
+	co = checkout
+	s = status
 [init]
 	defaultBranch = main
+[safe]
+	directory = /opt/flutter

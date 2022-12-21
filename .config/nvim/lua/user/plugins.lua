@@ -27,6 +27,8 @@ require('packer').startup(function(use)
         end
     }
 
+    use 'NMAC427/guess-indent.nvim'
+
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-context'
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
@@ -102,6 +104,8 @@ vim.api.nvim_create_autocmd({'BufWritePost'}, {
 vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin{} end)
 
 require("symbols-outline").setup({})
+
+require('guess-indent').setup {}
 
 vim.keymap.set('n', '<leader>wr', '<cmd>SymbolsOutline<cr>')
 

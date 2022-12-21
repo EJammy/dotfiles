@@ -7,6 +7,9 @@ map_key('n', '<m-cr>', ':lua ')
 map_key('n', '<c-s>', '<cmd>w<cr>')
 map_key('!', '<c-s>', '<cmd>w<cr>')
 
+map_key('', 'H', '^')
+map_key('', 'L', '$')
+
 -- map_key('!', 'qw', '{')
 -- map_key('!', 'wq', '}')
 -- map_key('!', 'qq', '(')
