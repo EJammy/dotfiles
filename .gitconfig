@@ -10,3 +10,5 @@
 	defaultBranch = main
 [safe]
 	directory = /opt/flutter
+[pull]
+	ff = only

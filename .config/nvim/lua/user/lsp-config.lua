@@ -10,6 +10,7 @@ local lsp_servers = {
     pyright = {},
     texlab = {},
     dartls = {},
+    jsonls = {},
 }
 
 for server, _ in pairs(lsp_servers) do
