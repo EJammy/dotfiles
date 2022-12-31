@@ -44,11 +44,11 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', ' r1', reload_config)
 vim.keymap.set('n', ' r2', reload_plugins)
 
-require 'user.plugins'.setup()
-require 'user.lsp'.setup()
-require 'user.lsp-config'.setup()
-require 'user.options'.setup()
-require 'user.keymaps'.setup()
+require 'plugins'.setup()
+require 'lsp'.setup()
+require 'lsp-config'.setup()
+require 'options'.setup()
+require 'keymaps'.setup()
 
 local function open_snippet()
     vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
