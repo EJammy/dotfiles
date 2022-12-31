@@ -26,11 +26,6 @@
 
 local function reload_config()
     -- vim.cmd [[ set all& ]]
-    for key, _ in pairs(package.loaded) do
-        if string.sub(key, 0, 5) == 'user.' then
-            package.loaded[key] = nil
-        end
-    end
     dofile(vim.fn.stdpath('config') .. '/init.lua')
     local function try_load(file)
         if vim.fn.empty(vim.fn.glob(file)) == 0 then dofile(file) end
@@ -49,11 +44,11 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', ' r1', reload_config)
 vim.keymap.set('n', ' r2', reload_plugins)
 
-require 'user.plugins'
-require 'user.lsp'
-require 'user.lsp-config'
-require 'user.options'
-require 'user.keymaps'
+require 'user.plugins'.setup()
+require 'user.lsp'.setup()
+require 'user.lsp-config'.setup()
+require 'user.options'.setup()
+require 'user.keymaps'.setup()
 
 local function open_snippet()
     vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
