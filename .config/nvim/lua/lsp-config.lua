@@ -1,7 +1,6 @@
 -- Setup lspconfig.
 -- :h lspconfig-all
 
-local function setup()
     local default_capabilities = require('cmp_nvim_lsp').default_capabilities
 
     local on_attach = require('lsp').on_attach
@@ -106,9 +105,4 @@ local function setup()
         --     monoPath = "/usr/bin/mono"
         -- }
     }
-end
 
-return
-{
-    setup = setup
-}

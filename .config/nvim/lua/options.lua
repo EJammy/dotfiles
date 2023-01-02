@@ -1,4 +1,3 @@
-local function setup()
     local options = {
         number = true,
         relativenumber = true,
@@ -44,6 +43,4 @@ local function setup()
         vim.opt[key] = val
     end
 
-end
 
-return { setup = setup }

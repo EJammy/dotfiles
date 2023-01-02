@@ -2,7 +2,6 @@
 -- Which-key
 --  bug report: terminal mode
 --  disable all insert mode maps
--- neodev??
 -- cmp mappings good?
 -- cmp documentations
 --
@@ -12,7 +11,6 @@
 -- git diff
 -- git compare w/ last commit
 -- focus mode
--- peekaboo
 -- vim wiki
 -- telescope
 -- startup screen
@@ -24,9 +22,8 @@
 -- different os
 -- http://neovimcraft.com
 
-local function reload_config()
+local function reload_ftconfig()
     -- vim.cmd [[ set all& ]]
-    dofile(vim.fn.stdpath('config') .. '/init.lua')
     local function try_load(file)
         if vim.fn.empty(vim.fn.glob(file)) == 0 then dofile(file) end
     end
@@ -34,21 +31,32 @@ local function reload_config()
     try_load(vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.vim')
 end
 
-
 local function reload_plugins()
     vim.cmd [[ PackerSync ]]
 end
 
+-- :h last-position-jump
+vim.cmd([[
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+  ]])
+
+
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', ' r1', reload_config)
+vim.keymap.set('n', ' r1', '<cmd>so %<cr>')
 vim.keymap.set('n', ' r2', reload_plugins)
+vim.keymap.set('n', ' r3', reload_ftconfig)
 
-require 'plugins'.setup()
-require 'lsp'.setup()
-require 'lsp-config'.setup()
-require 'options'.setup()
-require 'keymaps'.setup()
+
+require 'plugins'
+require 'lsp'
+require 'lsp-config'
+require 'options'
+require 'keymaps'
+
 
 local function open_snippet()
     vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
@@ -59,6 +67,7 @@ local function open_ft_settings()
     vim.cmd('e ' .. vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.lua')
 end
 vim.api.nvim_create_user_command('FTSettings', open_ft_settings, {})
+
 
 -- new undo block at period
 -- imap . .<c-g>u
