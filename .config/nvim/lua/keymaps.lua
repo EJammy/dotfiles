@@ -53,43 +53,40 @@ end
 
 vim.g.mapleader = ' '
 
-wk.register({q = {
-    name = 'Quick settings',
-    {
-        c = {
-            (function()
-                local cur = 1
-                return function()
-                    local opt = {'latte', 'mocha'}
-                    cur = cur + 1
-                    if cur > #opt then
-                        cur = cur % #opt
-                    end
-                    vim.cmd('Catppuccin ' .. opt[cur])
+wk.register({ q = { name = 'Quick settings', {
+    c = {
+        (function()
+            local cur = 1
+            return function()
+                local opt = {'latte', 'mocha'}
+                cur = cur + 1
+                if cur > #opt then
+                    cur = cur % #opt
                 end
-            end)(),
-            'Toggle light mode'
-        },
-        n = {
-            function()
-                vim.o.number = not vim.o.number
-                vim.o.rnu = not vim.o.rnu
-            end,
-            'Toggle line number'
-        },
-        w = {
-            function() vim.o.wrap = not vim.o.wrap end,
-            'Toggle wrap'
-        },
+                vim.cmd('Catppuccin ' .. opt[cur])
+            end
+        end)(),
+        'Toggle light mode'
+    },
+    n = {
+        function()
+            vim.o.number = not vim.o.number
+            vim.o.rnu = not vim.o.rnu
+        end,
+        'Toggle line number'
+    },
+    w = {
+        function() vim.o.wrap = not vim.o.wrap end,
+        'Toggle wrap'
+    },
+    l = {
+        name = 'LSP',
         l = {
-            name = 'LSP',
-            l = {
-                toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end, true),
-                'Toggle virtual text'
-            }
+            toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end, true),
+            'Toggle virtual text'
         }
     }
-}}, { prefix = '<leader>' })
+}}}, { prefix = '<leader>' })
 
 
 local leader_keymaps = {
