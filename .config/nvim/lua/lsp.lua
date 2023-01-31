@@ -26,7 +26,7 @@ end
 
   vim.keymap.set({'i', 's'}, '<c-l>', function() luasnip.jump(1) end)
   vim.keymap.set({'i', 's'}, '<c-h>', function() luasnip.jump(-1) end)
-  vim.keymap.set({'i', 's'}, '<tab>', function() luasnip.jump(1) end)
+  -- vim.keymap.set({'i', 's'}, '<tab>', function() luasnip.jump(1) end)
   vim.keymap.set({'i', 's'}, '<s-tab>', function() luasnip.jump(-1) end)
 
   -- Global setup.
@@ -71,6 +71,8 @@ end
               luasnip.expand({})
           elseif cmp.visible() then
               cmp.confirm({ select = true })
+          elseif luasnip.jumpable(1) then
+              luasnip.jump(1)
           else
               fallback()
           end

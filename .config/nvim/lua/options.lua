@@ -23,6 +23,7 @@
 
         -- don't wrap lines
         wrap = false,
+        breakindent = true,
 
         scrolloff = 4,
         undofile = true,

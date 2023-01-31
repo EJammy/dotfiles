@@ -66,6 +66,8 @@ require('packer').startup(function(use)
         as = "catppuccin",
     }
 
+    use 'Eandrju/cellular-automaton.nvim'
+
     -- File specific
     use 'folke/neodev.nvim'
     use 'lervag/vimtex'

@@ -12,6 +12,7 @@
         texlab = {},
         dartls = {},
         jsonls = {},
+	phpactor = {},
     }
 
     for server, _ in pairs(lsp_servers) do

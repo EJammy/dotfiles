@@ -68,6 +68,11 @@ local function open_ft_settings()
 end
 vim.api.nvim_create_user_command('FTSettings', open_ft_settings, {})
 
+local function open_settings()
+    vim.cmd('e ' .. vim.fn.stdpath('config'))
+end
+vim.api.nvim_create_user_command('Settings', open_settings, {})
+
 
 -- new undo block at period
 -- imap . .<c-g>u
