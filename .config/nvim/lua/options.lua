@@ -1,4 +1,6 @@
 local options = {
+   fileformats = 'unix,dos',
+   fileformat = 'unix',
    number = true,
    relativenumber = true,
 
