@@ -11,6 +11,12 @@ require('packer').startup(function(use)
         end
     }
 
+    use "klen/nvim-config-local"
+
+    use 'norcalli/nvim-colorizer.lua'
+
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+
     use {
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -45,6 +51,8 @@ require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'nvim-tree/nvim-tree.lua'
 
+    use "williamboman/mason.nvim"
+
     use 'hrsh7th/nvim-cmp'
 
     use 'hrsh7th/cmp-path'
@@ -55,7 +63,7 @@ require('packer').startup(function(use)
     -- use 'hrsh7th/cmp-buffer'
 
     -- use { 'Issafalcon/lsp-overloads.nvim'}
-    use 'ray-x/lsp_signature.nvim'
+    use { 'ray-x/lsp_signature.nvim'} --, tag = "v0.2.0" }
 
     use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
     use 'saadparwaiz1/cmp_luasnip'
@@ -73,6 +81,8 @@ require('packer').startup(function(use)
     use 'lervag/vimtex'
     use 'frazrepo/vim-rainbow'
     use 'simrat39/rust-tools.nvim'
+    use 'mattn/emmet-vim'
+    use 'tikhomirov/vim-glsl'
 
 end)
 
@@ -109,6 +119,23 @@ require("nvim-tree").setup({
     },
 })
 
+local function open_nvim_tree(data)
+
+  -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- change to the directory
+  vim.cmd.cd(data.file)
+
+  -- open the tree
+  require("nvim-tree.api").tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.api.nvim_create_autocmd({'BufWritePost'}, {
@@ -120,6 +147,7 @@ vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin{} e
 
 require("symbols-outline").setup({})
 
+require("mason").setup()
 
 require'lsp_signature'.setup{
     hint_prefix = ">> ",
@@ -128,6 +156,10 @@ require'lsp_signature'.setup{
 }
 
 require('guess-indent').setup {}
+
+require'colorizer'.setup()
+
+require'config-local'.setup()
 
 vim.keymap.set('n', '<leader>wr', '<cmd>SymbolsOutline<cr>')
 
@@ -157,8 +189,8 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " supported backends and further explanation is provided in the documentation,
 " see ":help vimtex-compiler".
 " let g:vimtex_compiler_method = 'latexrun'
-
 ]]
+--vim.keymap.del('i', ']]')
 
 vim.cmd[[
 au FileType scheme call rainbow#load()

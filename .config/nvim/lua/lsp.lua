@@ -15,6 +15,7 @@ end
   -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
   vim.keymap.set('n', '<space>l<space>', vim.diagnostic.open_float, opts)
+  vim.keymap.set('i', '<a-k>', vim.lsp.buf.signature_help, opts)
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer

@@ -12,7 +12,11 @@
         texlab = {},
         dartls = {},
         jsonls = {},
-	phpactor = {},
+        phpactor = {},
+        html = {},
+        cssls = {},
+        -- emmet_ls = {},
+        glslls = {},
     }
 
     for server, _ in pairs(lsp_servers) do
@@ -22,6 +26,12 @@
         }
     end
 
+    require'lspconfig'.html.setup{
+        capabilities = default_capabilities(),
+        on_attach = on_attach,
+        filetypes = {"html", "php"},
+    }
+
     require'lspconfig'.clangd.setup {
         capabilities = default_capabilities({
             snippetSupport = false,
@@ -30,7 +40,7 @@
         on_attach = on_attach
     }
 
-    require'lspconfig'.sumneko_lua.setup {
+    require'lspconfig'.lua_ls.setup {
         on_attach = on_attach,
         capabilities = default_capabilities(),
         settings = {
@@ -106,4 +116,5 @@
         --     monoPath = "/usr/bin/mono"
         -- }
     }
+
 
