@@ -12,3 +12,7 @@
 	directory = /opt/flutter
 [pull]
 	ff = only
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

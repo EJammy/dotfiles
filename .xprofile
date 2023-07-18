@@ -5,3 +5,5 @@ export XMODIFIERS="@im=fcitx5"
 
 # scaling
 # export GDK_SCALE=2
+
+xinput set-prop 13 329 50
