@@ -1,5 +1,4 @@
 require('packer').startup(function(use)
-
    use 'wbthomason/packer.nvim'
 
    -- dependency for many plugins
@@ -7,11 +6,8 @@ require('packer').startup(function(use)
 
    -- # Essentials
    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
-   use {
-      'numToStr/Comment.nvim',
-   }
+   use 'numToStr/Comment.nvim'
    use "klen/nvim-config-local"
-   use 'norcalli/nvim-colorizer.lua'
    use {
       "kylechui/nvim-surround",
       tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -19,7 +15,6 @@ require('packer').startup(function(use)
    use 'nvim-tree/nvim-tree.lua'
    use 'folke/which-key.nvim'
    use 'NMAC427/guess-indent.nvim'
-   use "lukas-reineke/indent-blankline.nvim"
 
    use 'nvim-treesitter/nvim-treesitter'
    use 'nvim-treesitter/nvim-treesitter-context'
@@ -45,12 +40,19 @@ require('packer').startup(function(use)
    -- use 'hrsh7th/cmp-buffer'
 
    -- use { 'Issafalcon/lsp-overloads.nvim'}
-   use { 'ray-x/lsp_signature.nvim'} --, tag = "v0.2.0" }
+   use { 'ray-x/lsp_signature.nvim' } --, tag = "v0.2.0" }
 
-   use {"L3MON4D3/LuaSnip", tag = "v2.*"}
+   use { "L3MON4D3/LuaSnip", tag = "v2.*" }
    use 'saadparwaiz1/cmp_luasnip'
 
    -- # Eye candy
+   use 'norcalli/nvim-colorizer.lua'
+   use "lukas-reineke/indent-blankline.nvim"
+   use "b0o/incline.nvim"
+   use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+   }
    use {
       "catppuccin/nvim",
       as = "catppuccin",
@@ -67,20 +69,18 @@ require('packer').startup(function(use)
    use 'mattn/emmet-vim'
    use 'tikhomirov/vim-glsl'
    -- use 'ray-x/go.nvim'
-
 end)
 
 -- # Essentials
 require('Comment').setup()
 require('config-local').setup()
-require('colorizer').setup()
 require('nvim-surround').setup()
 
 require("nvim-tree").setup({
    filters = {
       dotfiles = true,
       -- Unity meta files
-      custom = {'.\\+.meta'},
+      custom = { '.\\+.meta' },
    },
 })
 local function open_nvim_tree(data)
@@ -102,7 +102,7 @@ local all_keys = {}
 for i = ('a'):byte(), ('z'):byte() do
    table.insert(all_keys, string.char(i))
 end
-require('which-key').setup{
+require('which-key').setup {
    triggers_blacklist = {
       i = all_keys,
       t = all_keys,
@@ -111,28 +111,99 @@ require('which-key').setup{
 }
 
 require('guess-indent').setup()
-require("indent_blankline").setup {
-   -- for example, context is off by default, use this to turn it on
-   show_current_context = true,
-   show_current_context_start = true,
-}
 require("symbols-outline").setup()
 
 -- # LSP, snippet, and autocomplete
 require("mason").setup()
-require'lsp_signature'.setup{
+require 'lsp_signature'.setup {
    hint_prefix = ">> ",
    toggle_key = '<m-k>',
    select_signature_key = '<m-j>'
 }
 require("luasnip.loaders.from_snipmate").lazy_load()
-vim.api.nvim_create_autocmd({'BufWritePost'}, {
-   pattern = {'*.snippets'},
+vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+   pattern = { '*.snippets' },
    callback = require("luasnip.loaders.from_snipmate").lazy_load,
 })
 
 -- # Eye candy
-vim.g.catppuccin_flavour = 'latte' -- latte, frappe, macchiato, mocha
+-- require('incline').setup {
+--    window = {
+--       margin = {
+--          horizontal = 0,
+--          vertical = 0
+--       }
+--    }
+-- }
+require('colorizer').setup()
+require("indent_blankline").setup {
+   -- for example, context is off by default, use this to turn it on
+   show_current_context = true,
+   show_current_context_start = true,
+}
+require('lualine').setup {
+   options = {
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
+      disabled_filetypes = {
+         statusline = {},
+         winbar = {},
+      },
+      ignore_focus = {},
+      always_divide_middle = true,
+      globalstatus = true,
+      refresh = {
+         statusline = 1000,
+         tabline = 1000,
+         winbar = 1000,
+      }
+   },
+   sections = {
+      lualine_a = {
+         'mode',
+         function ()
+            if require('luasnip').jumpable(1) then
+               return '<C-L>'
+            end
+            return ''
+         end,
+         function ()
+            if require('luasnip').expandable() then
+               return 'snip'
+            end
+            return ''
+         end
+      },
+      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_c = { 'filename' },
+      lualine_x = {
+         'encoding', 'fileformat', 'filetype',
+      },
+      lualine_y = {
+
+         function()
+            local names = {}
+            for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+               table.insert(names, server.name)
+            end
+            return " [" .. table.concat(names, " ") .. "]"
+         end
+
+   },
+      lualine_z = { 'progress', 'location' }
+   },
+   inactive_sections = {
+      lualine_c = { 'filename' },
+      lualine_x = { 'location' },
+   },
+   winbar = {
+      lualine_z = { 'filename' }
+   },
+   tabline = {
+   },
+   extensions = {}
+}
+vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 require('catppuccin').setup({
    transparent_background = false,
 })
@@ -180,7 +251,7 @@ vim.cmd [[
 --vim.keymap.del('i', ']]')
 
 -- TODO: move this to ftplugin?
-vim.cmd[[
+vim.cmd [[
 au FileType scheme call rainbow#load()
 ]]
 

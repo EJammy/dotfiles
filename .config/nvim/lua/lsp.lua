@@ -1,7 +1,4 @@
 local on_attach = function(client, bufnr)
-   -- Enable completion triggered by <c-x><c-o>
-   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
    require 'keymaps'.on_attach_keymaps(bufnr)
 end
 
@@ -19,7 +16,6 @@ vim.keymap.set('i', '<a-k>', vim.lsp.buf.signature_help, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
----@diagnostic disable-next-line: unused-local
 
 ---- :h cmp-usage
 local cmp = require 'cmp'
