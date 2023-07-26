@@ -121,4 +121,3 @@ require'lspconfig'.omnisharp.setup {
    -- }
 }
 
-

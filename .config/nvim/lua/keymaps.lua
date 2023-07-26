@@ -106,6 +106,7 @@ local leader_keymaps = {
    x = '<cmd>bp|bd#<cr>',
 
    we = '<cmd>NvimTreeToggle<CR>',
+   wr = '<cmd>SymbolsOutline<cr>',
 
    -- clear highlights
    h = '<cmd>nohls<cr>',
@@ -151,7 +152,10 @@ function M.on_attach_keymaps(bufnr)
 
    map_func('n', '<space>lc', 'vim.lsp.buf.code_action()', bufopts)
    map_func('n', 'gr', 'vim.lsp.buf.references()', bufopts)
-   map_func('n', '<space>f', 'vim.lsp.buf.format { async = true }', bufopts)
+   map_func({'n', 'v'}, '<space>f', 'vim.lsp.buf.format { async = true }', bufopts)
 end
+
+vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin() end)
+vim.keymap.set('n', '<a-f>', function() require('telescope.builtin').find_files() end)
 
 return M

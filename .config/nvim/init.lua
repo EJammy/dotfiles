@@ -36,14 +36,8 @@ local function reload_plugins()
    vim.cmd [[ PackerSync ]]
 end
 
--- :h last-position-jump
-vim.cmd([[
-autocmd BufReadPost *
-\ if line("'\"") >= 1 && line("'\"") <= line("$") |
-\   exe "normal! g`\"" |
-\ endif
-]])
-
+vim.api.nvim_create_autocmd('BufWinLeave', { command = 'silent! mkview' })
+vim.api.nvim_create_autocmd('BufWinEnter', { command = 'silent! loadview' })
 
 vim.g.mapleader = ' '
 
@@ -51,13 +45,11 @@ vim.keymap.set('n', ' r1', '<cmd>so %<cr>')
 vim.keymap.set('n', ' r2', reload_plugins)
 vim.keymap.set('n', ' r3', reload_ftconfig)
 
-
+require 'options'
 require 'plugins'
 require 'lsp'
 require 'lsp-config'
-require 'options'
 require 'keymaps'
-
 
 local function open_snippet()
    vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
@@ -74,10 +66,8 @@ local function open_settings()
 end
 vim.api.nvim_create_user_command('Settings', open_settings, {})
 
-
 -- new undo block at period
 -- imap . .<c-g>u
-
 
 function Toggle_term(termname)
    local pane = vim.fn.bufwinid(termname)
