@@ -1,158 +1,171 @@
 require('packer').startup(function(use)
 
-    use 'nvim-lua/plenary.nvim'
-    use 'wbthomason/packer.nvim'
+   use 'nvim-lua/plenary.nvim'
+   use 'wbthomason/packer.nvim'
 
-    -- Essentials
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+   -- Essentials
+   use {
+      'numToStr/Comment.nvim',
+      config = function()
+         require('Comment').setup()
+      end
+   }
 
-    use "klen/nvim-config-local"
+   use "klen/nvim-config-local"
 
-    use 'norcalli/nvim-colorizer.lua'
+   use 'norcalli/nvim-colorizer.lua'
 
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-    use {
-        "kylechui/nvim-surround",
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-        config = function()
-            require("nvim-surround").setup {
-                -- Configuration here, or leave empty to use defaults
-            }
-        end
-    }
+   use {
+      "kylechui/nvim-surround",
+      tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+      config = function()
+         require("nvim-surround").setup {
+            -- Configuration here, or leave empty to use defaults
+         }
+      end
+   }
 
-    use {
-        'folke/which-key.nvim',
-        config = function() 
-        end
-    }
+   use {
+      'folke/which-key.nvim',
+      config = function() 
+      end
+   }
 
-    use 'NMAC427/guess-indent.nvim'
+   use 'NMAC427/guess-indent.nvim'
+   use "lukas-reineke/indent-blankline.nvim"
 
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/nvim-treesitter-context'
-    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
+   use 'nvim-treesitter/nvim-treesitter'
+   use 'nvim-treesitter/nvim-treesitter-context'
+   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
 
-    use 'simrat39/symbols-outline.nvim'
-    -- use 'stevearc/aerial.nvim'
+   use 'simrat39/symbols-outline.nvim'
+   -- use 'stevearc/aerial.nvim'
 
-    -- peek register
-    -- use 'junegunn/vim-peekaboo'
+   -- peek register
+   -- use 'junegunn/vim-peekaboo'
 
-    -- use 'vimwiki/vimwiki'
+   -- use 'vimwiki/vimwiki'
 
-    -- LSP, snippet, and autocomplete
-    use 'neovim/nvim-lspconfig'
-    use 'nvim-tree/nvim-tree.lua'
+   -- LSP, snippet, and autocomplete
+   use 'neovim/nvim-lspconfig'
+   use 'nvim-tree/nvim-tree.lua'
 
-    use "williamboman/mason.nvim"
+   use "williamboman/mason.nvim"
 
-    use 'hrsh7th/nvim-cmp'
+   use 'hrsh7th/nvim-cmp'
 
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-nvim-lsp'
-    -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
-    use 'hrsh7th/cmp-cmdline'
-    -- use 'hrsh7th/cmp-cmdline'
-    -- use 'hrsh7th/cmp-buffer'
+   use 'hrsh7th/cmp-path'
+   use 'hrsh7th/cmp-nvim-lsp'
+   -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
+   use 'hrsh7th/cmp-cmdline'
+   -- use 'hrsh7th/cmp-cmdline'
+   -- use 'hrsh7th/cmp-buffer'
 
-    -- use { 'Issafalcon/lsp-overloads.nvim'}
-    use { 'ray-x/lsp_signature.nvim'} --, tag = "v0.2.0" }
+   -- use { 'Issafalcon/lsp-overloads.nvim'}
+   use { 'ray-x/lsp_signature.nvim'} --, tag = "v0.2.0" }
 
-    use {"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"}
-    use 'saadparwaiz1/cmp_luasnip'
+   use {"L3MON4D3/LuaSnip", tag = "v2.*"}
+   use 'saadparwaiz1/cmp_luasnip'
 
-    -- Eye candy
-    use {
-        "catppuccin/nvim",
-        as = "catppuccin",
-    }
+   -- Eye candy
+   use {
+      "catppuccin/nvim",
+      as = "catppuccin",
+   }
 
-    use 'Eandrju/cellular-automaton.nvim'
+   use 'Eandrju/cellular-automaton.nvim'
 
-    -- File specific
-    use 'folke/neodev.nvim'
-    use 'lervag/vimtex'
-    use 'frazrepo/vim-rainbow'
-    use 'simrat39/rust-tools.nvim'
-    use 'mattn/emmet-vim'
-    use 'tikhomirov/vim-glsl'
+   -- File type specific
+   use 'folke/neodev.nvim'
+   use 'lervag/vimtex'
+   use 'frazrepo/vim-rainbow'
+   use 'simrat39/rust-tools.nvim'
+   use 'mattn/emmet-vim'
+   use 'tikhomirov/vim-glsl'
+   use 'ray-x/go.nvim'
 
 end)
 
 local all_keys = {}
 for i = ('a'):byte(), ('z'):byte() do
-    table.insert(all_keys, string.char(i))
+   table.insert(all_keys, string.char(i))
 end
 
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 require("catppuccin").setup({
-    transparent_background = false,
+   transparent_background = false,
 })
 vim.api.nvim_command "colorscheme catppuccin"
 
 require("which-key").setup{
-    triggers_blacklist = {
-        i = all_keys,
-        t = all_keys,
-        c = all_keys,
-    }
+   triggers_blacklist = {
+      i = all_keys,
+      t = all_keys,
+      c = all_keys,
+   }
 }
 
-require("rust-tools").setup()
+require("rust-tools").setup({
+   server = {
+      on_attach = require('lsp').on_attach
+   },
+})
 
 require("neodev").setup({
-    -- add any options here, or leave empty to use the default settings
+   -- add any options here, or leave empty to use the default settings
 })
 
 require("nvim-tree").setup({
-    filters = {
-        dotfiles = true,
-        -- Unity meta files
-        custom = {'.\\+.meta'},
-    },
+   filters = {
+      dotfiles = true,
+      -- Unity meta files
+      custom = {'.\\+.meta'},
+   },
 })
 
 local function open_nvim_tree(data)
 
-  -- buffer is a directory
-  local directory = vim.fn.isdirectory(data.file) == 1
+   -- buffer is a directory
+   local directory = vim.fn.isdirectory(data.file) == 1
 
-  if not directory then
-    return
-  end
+   if not directory then
+      return
+   end
 
-  -- change to the directory
-  vim.cmd.cd(data.file)
+   -- change to the directory
+   vim.cmd.cd(data.file)
 
-  -- open the tree
-  require("nvim-tree.api").tree.open()
+   -- open the tree
+   require("nvim-tree.api").tree.open()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.api.nvim_create_autocmd({'BufWritePost'}, {
-    pattern = {'*.snippets'},
-    callback = require("luasnip.loaders.from_snipmate").lazy_load,
+   pattern = {'*.snippets'},
+   callback = require("luasnip.loaders.from_snipmate").lazy_load,
 })
 
 vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin{} end)
 
 require("symbols-outline").setup({})
 
+
 require("mason").setup()
 
+require("indent_blankline").setup {
+   -- for example, context is off by default, use this to turn it on
+   show_current_context = true,
+   show_current_context_start = true,
+}
+
 require'lsp_signature'.setup{
-    hint_prefix = ">> ",
-    toggle_key = '<m-k>',
-    select_signature_key = '<m-j>'
+   hint_prefix = ">> ",
+   toggle_key = '<m-k>',
+   select_signature_key = '<m-j>'
 }
 
 require('guess-indent').setup {}
@@ -160,6 +173,8 @@ require('guess-indent').setup {}
 require'colorizer'.setup()
 
 require'config-local'.setup()
+
+require('go').setup()
 
 vim.keymap.set('n', '<leader>wr', '<cmd>SymbolsOutline<cr>')
 

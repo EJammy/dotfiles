@@ -1,3 +1,4 @@
+-- :h lua-guide
 -- TODO:
 -- Which-key
 --  bug report: terminal mode
@@ -5,6 +6,7 @@
 -- cmp mappings good?
 -- cmp documentations
 --
+-- tree sitter
 -- which-key for nvim-tree?
 -- git blame
 -- git gutter
@@ -14,7 +16,6 @@
 -- vim wiki
 -- telescope
 -- startup screen
--- return cursor pos
 -- check gh stars
 
 -- https://github.com/nanotee/nvim-lua-guide
@@ -23,25 +24,25 @@
 -- http://neovimcraft.com
 
 local function reload_ftconfig()
-    -- vim.cmd [[ set all& ]]
-    local function try_load(file)
-        if vim.fn.empty(vim.fn.glob(file)) == 0 then dofile(file) end
-    end
-    try_load(vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.lua')
-    try_load(vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.vim')
+   -- vim.cmd [[ set all& ]]
+   local function try_load(file)
+      if vim.fn.empty(vim.fn.glob(file)) == 0 then dofile(file) end
+   end
+   try_load(vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.lua')
+   try_load(vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.vim')
 end
 
 local function reload_plugins()
-    vim.cmd [[ PackerSync ]]
+   vim.cmd [[ PackerSync ]]
 end
 
 -- :h last-position-jump
 vim.cmd([[
 autocmd BufReadPost *
-  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
-  ]])
+\ if line("'\"") >= 1 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
+]])
 
 
 vim.g.mapleader = ' '
@@ -59,17 +60,17 @@ require 'keymaps'
 
 
 local function open_snippet()
-    vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
+   vim.cmd('e ' .. vim.fn.stdpath('config') .. '/snippets/' .. vim.bo.filetype .. '.snippets')
 end
 vim.api.nvim_create_user_command('Snippets', open_snippet, {})
 
 local function open_ft_settings()
-    vim.cmd('e ' .. vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.lua')
+   vim.cmd('e ' .. vim.fn.stdpath('config') .. '/ftplugin/' .. vim.bo.filetype .. '.lua')
 end
 vim.api.nvim_create_user_command('FTSettings', open_ft_settings, {})
 
 local function open_settings()
-    vim.cmd('e ' .. vim.fn.stdpath('config'))
+   vim.cmd('e ' .. vim.fn.stdpath('config'))
 end
 vim.api.nvim_create_user_command('Settings', open_settings, {})
 
@@ -79,20 +80,20 @@ vim.api.nvim_create_user_command('Settings', open_settings, {})
 
 
 function Toggle_term(termname)
-    local pane = vim.fn.bufwinid(termname)
-    local buf = vim.fn.bufexists(termname)
-    if pane > -1 then
-        -- pane is visible
-        vim.api.nvim_win_hide(pane)
-    elseif buf > 0 then
-        -- buffer loaded, not visible
-        vim.cmd('botright 12split ' .. termname)
-    else
-        -- create buffer
-        vim.cmd("botright 12split term://zsh")
-        vim.cmd("file " .. termname)
-        vim.opt.buflisted = false
-    end
+   local pane = vim.fn.bufwinid(termname)
+   local buf = vim.fn.bufexists(termname)
+   if pane > -1 then
+      -- pane is visible
+      vim.api.nvim_win_hide(pane)
+   elseif buf > 0 then
+      -- buffer loaded, not visible
+      vim.cmd('botright 12split ' .. termname)
+   else
+      -- create buffer
+      vim.cmd("botright 12split term://zsh")
+      vim.cmd("file " .. termname)
+      vim.opt.buflisted = false
+   end
 end
 
 vim.keymap.set('t', '<c-w>', '<c-\\><c-n><c-w>')
