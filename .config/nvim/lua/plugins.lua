@@ -67,6 +67,7 @@ require('packer').startup({function(use)
       "catppuccin/nvim",
       as = "catppuccin",
    }
+   use "olimorris/onedarkpro.nvim"
 
    -- # Nonsense
    use 'Eandrju/cellular-automaton.nvim'
@@ -261,7 +262,8 @@ vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 require('catppuccin').setup({
    transparent_background = false,
 })
-vim.api.nvim_command 'colorscheme catppuccin'
+
+vim.cmd 'colorscheme onedark_dark'
 
 -- # File type specific
 require("rust-tools").setup({
