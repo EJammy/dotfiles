@@ -176,6 +176,8 @@ function M.on_attach_keymaps(bufnr)
    map_func({'n', 'v'}, '<space>f', 'vim.lsp.buf.format { async = true }', bufopts)
 end
 
+vim.cmd.menu('PopUp.Go\\ to\\ definition <cmd>lua vim.lsp.buf.definition()<cr>')
+
 vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin() end)
 vim.keymap.set('n', '<a-f>', function() require('telescope.builtin').find_files() end)
 

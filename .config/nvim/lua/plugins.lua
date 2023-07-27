@@ -71,13 +71,14 @@ require('packer').startup({function(use)
 
    -- # Nonsense
    use 'Eandrju/cellular-automaton.nvim'
+   use 'notomo/gesture.nvim'
 
    -- # File type specific
    use 'folke/neodev.nvim'
    use 'lervag/vimtex'
    use 'frazrepo/vim-rainbow'
    use 'simrat39/rust-tools.nvim'
-   use 'mattn/emmet-vim'
+   -- use 'mattn/emmet-vim'
    use 'tikhomirov/vim-glsl'
    -- use 'ray-x/go.nvim'
 end,
@@ -277,6 +278,64 @@ require("neodev").setup({
 })
 -- require('go').setup()
 
+local gesture = require("gesture")
+vim.keymap.set("n", "<LeftDrag>", gesture.draw, { silent = true })
+vim.keymap.set("n", "<LeftRelease>", gesture.finish, { silent = true })
+gesture.register({
+   name = "scroll to bottom",
+   inputs = { gesture.up(), gesture.down() },
+   action = "normal! G",
+})
+gesture.register {
+   name = "Diff view",
+   inputs = { gesture.up(), gesture.left(), gesture.down() },
+   action = 'DiffviewOpen'
+}
+gesture.register {
+   name = "close tab",
+   inputs = { gesture.left(), gesture.right(), gesture.left() },
+   action = 'tabclose'
+}
+gesture.register {
+   name = 'scroll',
+   match = function(ctx)
+      return #ctx.inputs == 1
+   end,
+   can_match = function(ctx)
+      return #ctx.inputs == 1
+   end,
+   action = function(ctx)
+      local input = ctx.inputs[1]
+      if input.direction == 'UP' then
+      print('normal! ' .. input.length .. '\\<c-y>')
+      end
+      if input.direction == 'DOWN' then
+         vim.cmd('exe "normal! ' .. input.length .. '\\<c-e>"')
+      end
+
+   end,
+}
+gesture.register({
+   name = "close gesture traced windows",
+   match = function(ctx)
+      local last_input = ctx.inputs[#ctx.inputs]
+      return last_input and last_input.direction == "UP"
+   end,
+   can_match = function(ctx)
+      local first_input = ctx.inputs[1]
+      return first_input and first_input.direction == "RIGHT"
+   end,
+   action = function(ctx)
+      table.sort(ctx.window_ids, function(a, b)
+         return a > b
+      end)
+      for _, window_id in ipairs(vim.fn.uniq(ctx.window_ids)) do
+         vim.api.nvim_win_close(window_id, false)
+      end
+   end,
+})
+
+
 vim.cmd [[
    " VimTeX
    "
@@ -311,4 +370,3 @@ vim.cmd [[
 au FileType scheme call rainbow#load()
 ]]
 
--- return { setup = setup }
