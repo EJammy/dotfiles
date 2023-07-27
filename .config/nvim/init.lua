@@ -6,6 +6,8 @@
 -- cmp mappings good?
 -- cmp documentations
 --
+-- LSP quickfix list :h vim.diagnostic.setloclist
+--
 -- tree sitter
 -- which-key for nvim-tree?
 -- git blame
@@ -62,7 +64,7 @@ end
 vim.api.nvim_create_user_command('FTSettings', open_ft_settings, {})
 
 local function open_settings()
-   vim.cmd('e ' .. vim.fn.stdpath('config'))
+   vim.cmd('e ' .. vim.fn.stdpath('config') .. '/init.lua')
 end
 vim.api.nvim_create_user_command('Settings', open_settings, {})
 

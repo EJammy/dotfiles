@@ -112,6 +112,10 @@ local leader_keymaps = {
    h = '<cmd>nohls<cr>',
 
    c = '<cmd>ccl<cr>',
+
+   -- diff
+   d1 = '<cmd>diffthis<cr>',
+   d2 = '<cmd>diffthis<cr>',
 }
 
 for lhs, rhs in pairs(leader_keymaps) do

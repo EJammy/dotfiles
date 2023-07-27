@@ -141,16 +141,22 @@ require("indent_blankline").setup {
    show_current_context = true,
    show_current_context_start = true,
 }
+local function lualine_bool_func(fn, true_str, false_str)
+   return function ()
+      if fn() then
+         return true_str
+      end
+      return false_str
+   end
+end
 require('lualine').setup {
    options = {
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
       disabled_filetypes = {
+         'NvimTree',
+         'help',
          statusline = {},
          winbar = {},
       },
-      ignore_focus = {},
-      always_divide_middle = true,
       globalstatus = true,
       refresh = {
          statusline = 1000,
@@ -161,26 +167,23 @@ require('lualine').setup {
    sections = {
       lualine_a = {
          'mode',
-         function ()
-            if require('luasnip').jumpable(1) then
-               return '<C-L>'
-            end
-            return ''
-         end,
-         function ()
-            if require('luasnip').expandable() then
-               return 'snip'
-            end
-            return ''
-         end
+         lualine_bool_func(
+            function() return require('luasnip').jumpable(1) end,
+            '<C-L>', ''
+         ),
+         lualine_bool_func(
+            require('luasnip').expandable,
+            'snip', ''
+         ),
       },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = { 'filename' },
+      lualine_c = {
+         {'filename', path = 1}
+      },
       lualine_x = {
          'encoding', 'fileformat', 'filetype',
       },
       lualine_y = {
-
          function()
             local names = {}
             for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
@@ -188,15 +191,23 @@ require('lualine').setup {
             end
             return " [" .. table.concat(names, " ") .. "]"
          end
-
-   },
+      },
       lualine_z = { 'progress', 'location' }
    },
-   inactive_sections = {
-      lualine_c = { 'filename' },
-      lualine_x = { 'location' },
-   },
    winbar = {
+      lualine_a = {
+         lualine_bool_func(
+            function() return require('luasnip').jumpable(1) end,
+            '<C-L>', ''
+         ),
+         lualine_bool_func(
+            require('luasnip').expandable,
+            'snip', ''
+         ),
+      },
+      lualine_z = { 'filename' }
+   },
+   inactive_winbar = {
       lualine_z = { 'filename' }
    },
    tabline = {
