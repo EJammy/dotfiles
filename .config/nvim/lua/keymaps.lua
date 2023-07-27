@@ -86,41 +86,58 @@ wk.register({ q = { name = 'Quick settings', {
          toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end, true),
          'Toggle virtual text'
       }
-   }
+   },
 }}}, { prefix = '<leader>' })
 
 
 local leader_keymaps = {
+   qg = {
+      '<cmd>Gitsigns toggle_current_line_blame<cr>',
+      'Toggle Gitsigns'
+   },
+
+   [' '] = '<cmd>WhichKey<cr>',
+
    s = '<cmd>w<cr>',
 
    -- fold around brackets
    zf = 'zfa}',
 
    -- yank to system clipboard
-   y = {'"+y', {'n', 'v'} },
-   p = {'"+p', {'n', 'v'} },
+   y = {'"+y', mode = {'n', 'v'} },
+   p = {'"+p', mode = {'n', 'v'} },
 
    -- buffers
    j = '<cmd>bn<cr>',
    k = '<cmd>bp<cr>',
    x = '<cmd>bp|bd#<cr>',
 
+   w = { name = 'windows' },
    we = '<cmd>NvimTreeToggle<CR>',
    wr = '<cmd>SymbolsOutline<cr>',
 
-   -- clear highlights
-   h = '<cmd>nohls<cr>',
+   h = { '<cmd>nohls<cr>', 'clear highlights' },
 
-   c = '<cmd>ccl<cr>',
+   c = { '<cmd>ccl<cr>', 'close quickfix' },
 
    -- diff
+   d = { name = 'diff' },
    d1 = '<cmd>diffthis<cr>',
    d2 = '<cmd>diffthis<cr>',
 }
 
 for lhs, rhs in pairs(leader_keymaps) do
    if type(rhs) == 'table' then
-      map_key(rhs[2], '<leader>' .. lhs, rhs[1])
+      if rhs[1] then
+         wk.register(
+            { ['<leader>' .. lhs] = { rhs[1], rhs[2] or rhs[1] } },
+            { mode = rhs['mode'] or 'n' }
+         )
+      else
+         wk.register({
+            ['<leader>' .. lhs] = { name = rhs['name'] }
+         })
+      end
    else
       map_key('n', '<leader>' .. lhs, rhs)
    end

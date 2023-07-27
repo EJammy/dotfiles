@@ -1,8 +1,11 @@
-require('packer').startup(function(use)
+-- To Add: 
+-- https://github.com/notomo/gesture.nvim
+require('packer').startup({function(use)
    use 'wbthomason/packer.nvim'
 
    -- dependency for many plugins
    use 'nvim-lua/plenary.nvim'
+   use 'nvim-tree/nvim-web-devicons'
 
    -- # Essentials
    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
@@ -22,10 +25,14 @@ require('packer').startup(function(use)
    use 'simrat39/symbols-outline.nvim'
    -- use 'stevearc/aerial.nvim'
 
+   use 'petertriho/nvim-scrollbar'
+   use 'dstein64/nvim-scrollview'
    -- use 'vimwiki/vimwiki'
 
    -- # Git
    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+   use 'lewis6991/gitsigns.nvim'
+   use 'tpope/vim-fugitive'
 
    -- # LSP, snippet, and autocomplete
    use 'neovim/nvim-lspconfig'
@@ -45,9 +52,12 @@ require('packer').startup(function(use)
    use { "L3MON4D3/LuaSnip", tag = "v2.*" }
    use 'saadparwaiz1/cmp_luasnip'
 
+   use 'folke/trouble.nvim'
+
    -- # Eye candy
    use 'norcalli/nvim-colorizer.lua'
    use "lukas-reineke/indent-blankline.nvim"
+   use 'karb94/neoscroll.nvim'
    use "b0o/incline.nvim"
    use {
       'nvim-lualine/lualine.nvim',
@@ -69,7 +79,15 @@ require('packer').startup(function(use)
    use 'mattn/emmet-vim'
    use 'tikhomirov/vim-glsl'
    -- use 'ray-x/go.nvim'
-end)
+end,
+   config = {
+      display = {
+         open_fn = function()
+            return require('packer.util').float({ border = 'single' })
+         end
+      }
+   }
+})
 
 -- # Essentials
 require('Comment').setup()
@@ -112,8 +130,30 @@ require('which-key').setup {
 
 require('guess-indent').setup()
 require("symbols-outline").setup()
+-- require("scrollbar").setup {
+--    marks = {
+--       Cursor = {
+--          text = ''
+--       }
+--    }
+-- }
 
--- # LSP, snippet, and autocomplete
+-- # git
+require('gitsigns').setup {
+   current_line_blame = false,
+   current_line_blame_opts = {
+      virt_text = true,
+      virt_text_pos = 'right_align',
+      -- 'eol' | 'overlay' | 'right_align'
+      delay = 0,
+   },
+}
+require("scrollbar.handlers.gitsigns").setup()
+require('scrollview').setup({
+   column = 1
+})
+
+-- # lsp, snippet, and autocomplete
 require("mason").setup()
 require 'lsp_signature'.setup {
    hint_prefix = ">> ",
@@ -153,6 +193,8 @@ require('lualine').setup {
    options = {
       disabled_filetypes = {
          'NvimTree',
+         'DiffviewFileHistory',
+         'DiffviewFiles',
          'help',
          statusline = {},
          winbar = {},
@@ -214,6 +256,7 @@ require('lualine').setup {
    },
    extensions = {}
 }
+require('neoscroll').setup()
 vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
 require('catppuccin').setup({
    transparent_background = false,
