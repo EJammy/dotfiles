@@ -1,7 +1,7 @@
 #!/bin/sh
 
 install() {
-	target=$HOME/$1
+	target=$HOME/${2-$1}
 	if [[ -L $target ]]; then
 		echo "Found existing symlink at" $target
 	else
