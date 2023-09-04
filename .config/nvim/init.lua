@@ -19,11 +19,22 @@
 -- telescope
 -- startup screen
 -- check gh stars
+-- buffer line
 
 -- https://github.com/nanotee/nvim-lua-guide
 -- TOC?
 -- different os
 -- http://neovimcraft.com
+--
+--[[
+https://github.com/f-person/git-blame.nvim
+ https://github.com/APZelos/blamer.nvim
+https://github.com/lewis6991/gitsigns.nvim
+
+https://www.reddit.com/r/neovim/comments/ug96n9/which_tools_do_you_use_for_git_conflicts/
+https://www.reddit.com/r/neovim/comments/iwfv18/git_integration/
+https://www.reddit.com/r/neovim/comments/ts8app/what_are_the_must_have_git_plugs_in_your_opinion/
+]]--
 
 local function reload_ftconfig()
    -- vim.cmd [[ set all& ]]

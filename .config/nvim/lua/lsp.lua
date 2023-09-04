@@ -1,5 +1,6 @@
 local on_attach = function(client, bufnr)
-   require 'keymaps'.on_attach_keymaps(bufnr)
+    -- vim.api.nvim_create_autocmd('CursorHold', { callback = function(_) vim.lsp.buf.hover() end })
+    require'keymaps'.on_attach_keymaps(bufnr)
 end
 
 ---- Copied from :h lspconfig-keybindings
