@@ -1,4 +1,7 @@
-vim.keymap.set('n', '<F8>', '<cmd>w | !gcc %')
+vim.keymap.set('n', '<F7>', '<cmd>w | !gcc -o %< %<cr>')
+vim.keymap.set('n', '<F8>', '<cmd>w | !gcc %<cr>')
+vim.keymap.set('n', '<F9>', '<cmd>!./a.out<cr>')
+vim.keymap.set('n', '<F10>', '<cmd>w | !gcc % && ./a.out<cr>')
 
 --[[
 map <F9> :w<CR>:!./a.out<CR>

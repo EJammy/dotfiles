@@ -27,7 +27,7 @@ require('packer').startup({function(use)
 
    use 'petertriho/nvim-scrollbar'
    use 'dstein64/nvim-scrollview'
-   -- use 'vimwiki/vimwiki'
+   use 'vimwiki/vimwiki'
 
    -- # Git
    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -263,7 +263,7 @@ require('catppuccin').setup({
    transparent_background = false,
 })
 
-vim.cmd 'colorscheme onedark_dark'
+vim.cmd 'colorscheme catppuccin'
 
 -- # File type specific
 require("rust-tools").setup({

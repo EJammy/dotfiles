@@ -49,6 +49,7 @@ local function reload_plugins()
    vim.cmd [[ PackerSync ]]
 end
 
+vim.opt.viewoptions:remove('curdir')
 vim.api.nvim_create_autocmd('BufWinLeave', { command = 'silent! mkview' })
 vim.api.nvim_create_autocmd('BufWinEnter', { command = 'silent! loadview' })
 
