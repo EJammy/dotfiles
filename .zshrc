@@ -1,3 +1,12 @@
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=4000
@@ -39,3 +48,6 @@ source ~/.config/_alias.sh
 # autoload -Uz promptinit
 # promptinit
 # prompt fire
+
+# nonsense
+# fortune | cowsay -f $(ls /usr/share/cows/*.cow | shuf -n1) | lolcat      
