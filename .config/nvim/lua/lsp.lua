@@ -84,6 +84,10 @@ cmp.setup({
       -- end, { "i", "s" }),
    },
 
+   completion = {
+      keyword_length = 2,
+   },
+
    sources = cmp.config.sources({
       { name = 'luasnip' },
       { name = 'nvim_lsp' },

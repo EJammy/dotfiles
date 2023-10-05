@@ -21,9 +21,9 @@ map_key('', 'L', '$')
 -- map_key('!', 'zz', '\'')
 -- map_key('!', 'xx', '\"')
 
-map_key('!', 'fd', '<esc>')
-map_key('!', 'jk', '<esc>')
-map_key('!', 'kj', '<esc>')
+-- map_key('!', 'fd', '<esc>')
+-- map_key('!', 'jk', '<esc>')
+-- map_key('!', 'kj', '<esc>')
 
 -- map_key('', '<c-n>', '5j')
 -- map_key('', '<c-p>', '5k')

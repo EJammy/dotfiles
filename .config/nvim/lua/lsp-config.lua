@@ -17,6 +17,7 @@ local lsp_servers = {
    cssls = {},
    -- emmet_ls = {},
    glslls = {},
+   arduino_language_server = {},
 }
 
 for server, _ in pairs(lsp_servers) do
