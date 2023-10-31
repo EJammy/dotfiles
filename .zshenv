@@ -2,4 +2,5 @@
 
 export EDITOR="nvim"
 # export PATH=
-export PATH=/home/connorcc/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
