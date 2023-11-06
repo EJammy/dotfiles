@@ -162,6 +162,10 @@ require 'lsp_signature'.setup {
    toggle_key = '<m-k>',
    select_signature_key = '<m-j>'
 }
+require("luasnip").setup({
+   region_check_events = 'CursorMoved',
+   delete_check_events = 'TextChanged',
+})
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
    pattern = { '*.snippets' },
