@@ -54,9 +54,13 @@ require('packer').startup({function(use)
 
    use 'folke/trouble.nvim'
 
+   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+   use 'theHamsta/nvim-dap-virtual-text'
+
    -- # Eye candy
    use 'norcalli/nvim-colorizer.lua'
-   use "lukas-reineke/indent-blankline.nvim"
+   -- TODO
+   use { "lukas-reineke/indent-blankline.nvim", tag = "v2.*" }
    use 'karb94/neoscroll.nvim'
    use "b0o/incline.nvim"
    use {
@@ -81,6 +85,7 @@ require('packer').startup({function(use)
    -- use 'mattn/emmet-vim'
    use 'tikhomirov/vim-glsl'
    -- use 'ray-x/go.nvim'
+   use 'leoluz/nvim-dap-go'
 end,
    config = {
       display = {
@@ -171,6 +176,8 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
    pattern = { '*.snippets' },
    callback = require("luasnip.loaders.from_snipmate").lazy_load,
 })
+require("dapui").setup()
+require("nvim-dap-virtual-text").setup()
 
 -- # Eye candy
 -- require('incline').setup {
@@ -281,6 +288,7 @@ require("neodev").setup({
    -- add any options here, or leave empty to use the default settings
 })
 -- require('go').setup()
+require('dap-go').setup()
 
 -- local gesture = require("gesture")
 -- vim.keymap.set("n", "<LeftDrag>", gesture.draw, { silent = true })
