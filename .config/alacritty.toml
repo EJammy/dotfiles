@@ -1,0 +1,22 @@
+[font]
+size = 14.0
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Shift|Control"
+
+[window]
+opacity = 0.99
+
+[window.dimensions]
+columns = 92
+lines = 24
+
+[window.padding]
+x = 4
+y = 4
