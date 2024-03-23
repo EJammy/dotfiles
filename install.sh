@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
+# TODO: run shellcheck
 install() {
+	# use the second argument, if it exists
 	target=$HOME/${2-$1}
 	if [[ -L $target ]]; then
 		echo "Found existing symlink at" $target

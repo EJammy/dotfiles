@@ -1,16 +1,18 @@
 # usage: systemctl enable --user [service]
 # https://gist.github.com/kabili207/2cd2d637e5c7617411a666d8d7e97101
 
+# If there's problem with vim, try increasing write-back?
+# :h timestamps
+
 [Unit]
 Description=rclone mount
 
 [Service]
 ExecStart=/usr/bin/rclone mount \
 	--vfs-cache-mode full \
-	--vfs-write-back 5m \
+	--vfs-write-back 30s \
 	--vfs-cache-max-size 5G \
-	--vfs-cache-max-age 24h0m0s \
-	gdrive:Files %h/Files
+	gdrive-home:Files %h/Files
 ExecStop=/bin/fusermount -u %h/File
 Restart=always
 RestartSec=30

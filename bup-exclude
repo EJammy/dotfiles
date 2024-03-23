@@ -1,0 +1,4 @@
+/\.steampid$
+/node_modules/
+/\.venv/
+/Cache/
