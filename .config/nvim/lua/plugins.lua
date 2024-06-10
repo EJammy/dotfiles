@@ -54,7 +54,7 @@ require('packer').startup({function(use)
 
    use 'folke/trouble.nvim'
 
-   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
    use 'theHamsta/nvim-dap-virtual-text'
 
    -- # Eye candy
@@ -76,6 +76,7 @@ require('packer').startup({function(use)
    -- # Nonsense
    use 'Eandrju/cellular-automaton.nvim'
    use 'notomo/gesture.nvim'
+   use 'wakatime/vim-wakatime'
 
    -- # File type specific
    use 'folke/neodev.nvim'

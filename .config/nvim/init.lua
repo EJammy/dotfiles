@@ -34,6 +34,20 @@ https://github.com/lewis6991/gitsigns.nvim
 https://www.reddit.com/r/neovim/comments/ug96n9/which_tools_do_you_use_for_git_conflicts/
 https://www.reddit.com/r/neovim/comments/iwfv18/git_integration/
 https://www.reddit.com/r/neovim/comments/ts8app/what_are_the_must_have_git_plugs_in_your_opinion/
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 ]]--
 
 local function reload_ftconfig()
@@ -109,3 +123,5 @@ vim.cmd('au BufWinEnter,WinEnter toggle_term startinsert')
 vim.api.nvim_set_keymap('n', '<leader>wt', '<cmd>lua Toggle_term("toggle_term")<cr>', {})
 -- vim.api.nvim_set_keymap('t', '<leader>wt', '<cmd>lua Toggle_term("toggle_term")<cr>', {})
 
+-- TODO: move me
+vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] })

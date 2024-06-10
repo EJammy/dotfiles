@@ -180,5 +180,6 @@ vim.cmd.menu('PopUp.Go\\ to\\ definition <cmd>lua vim.lsp.buf.definition()<cr>')
 
 vim.keymap.set('n', '<a-p>', function() require('telescope.builtin').builtin() end)
 vim.keymap.set('n', '<a-f>', function() require('telescope.builtin').find_files() end)
+vim.keymap.set('n', '<a-b>', function() require('telescope.builtin').buffers() end)
 
 return M

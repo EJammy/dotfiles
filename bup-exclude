@@ -2,3 +2,8 @@
 /node_modules/
 /\.venv/
 /Cache/
+/\.minecraft/
+/_file_dump/Pictures/images/
+^/home/[a-zA-Z\-_]+/Games/
+^/home/[a-zA-Z\-_]+/.config/heroic/
+^/home/[a-zA-Z\-_]+/.config/discrod/
