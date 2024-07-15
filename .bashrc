@@ -126,3 +126,8 @@ files=/mnt/d
 cpdir=/mnt/d/my_stuff/codingContests
 alias cfast='g++ -std=c++17 -Wshadow -Wall -DLOCAL -O3'
 alias csafe='g++ -std=c++17 -Wshadow -Wall -DLOCAL -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g'
+
+alias conda-init='eval "$('conda' 'shell.bash' 'hook')"'
+
+# https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory
+PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'printf "\e]9;9;%s\e\\" "`cygpath -w "$PWD" -C ANSI`"'
