@@ -1,5 +1,6 @@
 -- :h lua-guide
 -- TODO:
+-- vim.diagnostic.setqflist()
 -- Which-key
 --  bug report: terminal mode
 --  disable all insert mode maps

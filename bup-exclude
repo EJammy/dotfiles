@@ -6,4 +6,6 @@
 /_file_dump/Pictures/images/
 ^/home/[a-zA-Z\-_]+/Games/
 ^/home/[a-zA-Z\-_]+/.config/heroic/
-^/home/[a-zA-Z\-_]+/.config/discrod/
+^/home/[a-zA-Z\-_]+/.config/discord/
+^/home/[a-zA-Z\-_]+/.config/Slack/
+/\.zoom/

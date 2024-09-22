@@ -10,7 +10,7 @@ require('packer').startup({function(use)
    -- # Essentials
    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
    use 'numToStr/Comment.nvim'
-   use "klen/nvim-config-local"
+   -- use "klen/nvim-config-local"
    use {
       "kylechui/nvim-surround",
       tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -99,7 +99,6 @@ end,
 
 -- # Essentials
 require('Comment').setup()
-require('config-local').setup()
 require('nvim-surround').setup()
 
 require("nvim-tree").setup({

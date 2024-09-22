@@ -37,7 +37,9 @@ local options = {
    termguicolors = true,
 
    -- fold method
-   foldmethod = 'syntax'
+   foldmethod = 'syntax',
+
+   exrc = true
 }
 
 for key, val in pairs(options) do

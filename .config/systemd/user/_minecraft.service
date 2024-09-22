@@ -1,0 +1,12 @@
+[Unit]
+Description=MC Server
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=%h/Documents/mc_server
+ExecStart=/bin/tmux -L minecraft new-session -d \
+	"java -Xmx8G -Xms256M -jar server.jar -nogui"
+
+[Install]
+WantedBy=default.target
