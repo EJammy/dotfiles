@@ -1,6 +1,6 @@
 local options = {
    number = true,
-   relativenumber = true,
+   -- relativenumber = true,
 
    tabstop = 4,
    shiftwidth = 0, -- use value from tabstop

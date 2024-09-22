@@ -143,14 +143,16 @@ return {
 
    -- # Essentials
    { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } ,
-   { 'numToStr/Comment.nvim' },
+   { 'numToStr/Comment.nvim', opts = {} },
    -- { "klen/nvim-config-local" },
    {
       "kylechui/nvim-surround",
+      opts = {},
       version = "*", -- for stability; omit to use `main` branch for the latest features
    },
    {
       'nvim-tree/nvim-tree.lua',
+      -- keys = { { '<leader>we' } },
       opts = {
          filters = {
             dotfiles = true,
@@ -159,41 +161,31 @@ return {
          },
       },
    },
-   {
-      'folke/which-key.nvim',
-      opts = {
-      },
-      version = '2.*.*',
-   },
-   { 'NMAC427/guess-indent.nvim' },
+   { 'folke/which-key.nvim', opts = {}, version = '2.*.*', },
+   { 'NMAC427/guess-indent.nvim', opts = {} },
 
    { 'nvim-treesitter/nvim-treesitter' },
    { 'nvim-treesitter/nvim-treesitter-context' },
 
-   { 'simrat39/symbols-outline.nvim' },
+   { 'simrat39/symbols-outline.nvim', opts = {} },
    -- { 'stevearc/aerial.nvim' },
 
    {
       'petertriho/nvim-scrollbar',
       enabled = false,
       config = function()
-         require("scrollbar.handlers.gitsigns").setup()
          require("scrollbar").setup {
-             marks = {
-                 Cursor = {
-                     text = ''
-                 }
-             }
+            marks = {
+               Cursor = {
+                  text = ''
+               }
+            }
          }
+         require("scrollbar.handlers.gitsigns").setup()
       end
    },
-   {
-      'dstein64/nvim-scrollview',
-      opts = {
-         column = 1
-      }
-   },
-   { 'vimwiki/vimwiki' },
+   { 'dstein64/nvim-scrollview', opts = { column = 1 } },
+   { 'vimwiki/vimwiki', enabled = false },
 
    -- # Git
    { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } ,
@@ -213,7 +205,7 @@ return {
 
    -- # LSP, snippet, and autocomplete
    { 'neovim/nvim-lspconfig' },
-   { 'williamboman/mason.nvim' },
+   { 'williamboman/mason.nvim', opts = {} },
 
    { 'hrsh7th/nvim-cmp' },
    { 'hrsh7th/cmp-path' },
@@ -253,11 +245,11 @@ return {
 
    { 'folke/trouble.nvim' },
 
-   { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
-   { 'theHamsta/nvim-dap-virtual-text' },
+   { "rcarriga/nvim-dap-ui", opts = {}, dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+   { 'theHamsta/nvim-dap-virtual-text', opts = {} },
 
    -- # Eye candy
-   { 'norcalli/nvim-colorizer.lua' },
+   { 'norcalli/nvim-colorizer.lua', opts = {} },
    -- TODO
    {
       "lukas-reineke/indent-blankline.nvim",
@@ -268,11 +260,11 @@ return {
          show_current_context_start = true,
       }
    },
-   { 'karb94/neoscroll.nvim' },
+   { 'karb94/neoscroll.nvim', opts = {} },
    { "b0o/incline.nvim" },
    {
       'nvim-lualine/lualine.nvim',
-      config = function() require('lualine').setup {
+      opts = function() return {
          options = {
             disabled_filetypes = {
                'NvimTree',
@@ -338,9 +330,8 @@ return {
          tabline = {
          },
          extensions = {}
-      }
-   end,
-   dependencies = { 'nvim-tree/nvim-web-devicons' }
+      } end, -- end opts = function() return
+      dependencies = { 'nvim-tree/nvim-web-devicons' }
    },
    {
       "catppuccin/nvim", name = "catppuccin", priority = 1000,
@@ -354,11 +345,12 @@ return {
    { 'wakatime/vim-wakatime' },
 
    -- # File type specific
-   { 'folke/neodev.nvim' },
+   { "folke/lazydev.nvim", ft = "lua", opts = {} },
    { 'lervag/vimtex' },
    { 'frazrepo/vim-rainbow' },
    {
       'simrat39/rust-tools.nvim',
+      ft = 'rust',
       config = function()
          require'rust-tools'.setup {
             server = {
@@ -369,6 +361,6 @@ return {
    },
    -- { 'mattn/emmet-vim' },
    { 'tikhomirov/vim-glsl' },
-   -- { 'ray-x/go.nvim' },
-   { 'leoluz/nvim-dap-go' },
+   -- { 'ray-x/go.nvim', opts = {} },
+   { 'leoluz/nvim-dap-go', opts = {} },
 }

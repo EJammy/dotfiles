@@ -1,6 +1,6 @@
 local on_attach = function(client, bufnr)
-    -- vim.api.nvim_create_autocmd('CursorHold', { callback = function(_) vim.lsp.buf.hover() end })
-    require'keymaps'.on_attach_keymaps(bufnr)
+   -- vim.api.nvim_create_autocmd('CursorHold', { callback = function(_) vim.lsp.buf.hover() end })
+   require'keymaps'.on_attach_keymaps(bufnr)
 end
 
 ---- Copied from :h lspconfig-keybindings
@@ -91,6 +91,7 @@ cmp.setup({
    sources = cmp.config.sources({
       { name = 'luasnip' },
       { name = 'nvim_lsp' },
+      { name = 'lazydev' },
       -- { name = 'nvim_lsp_signature_help' },
    }, {
       { name = 'buffer' },
