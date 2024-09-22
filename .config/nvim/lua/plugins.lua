@@ -1,113 +1,6 @@
 -- To Add: 
 -- https://github.com/notomo/gesture.nvim
-require('packer').startup({function(use)
-   use 'wbthomason/packer.nvim'
 
-   -- dependency for many plugins
-   use 'nvim-lua/plenary.nvim'
-   use 'nvim-tree/nvim-web-devicons'
-
-   -- # Essentials
-   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
-   use 'numToStr/Comment.nvim'
-   -- use "klen/nvim-config-local"
-   use {
-      "kylechui/nvim-surround",
-      tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-   }
-   use 'nvim-tree/nvim-tree.lua'
-   use 'folke/which-key.nvim'
-   use 'NMAC427/guess-indent.nvim'
-
-   use 'nvim-treesitter/nvim-treesitter'
-   use 'nvim-treesitter/nvim-treesitter-context'
-
-   use 'simrat39/symbols-outline.nvim'
-   -- use 'stevearc/aerial.nvim'
-
-   use 'petertriho/nvim-scrollbar'
-   use 'dstein64/nvim-scrollview'
-   use 'vimwiki/vimwiki'
-
-   -- # Git
-   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-   use 'lewis6991/gitsigns.nvim'
-   use 'tpope/vim-fugitive'
-
-   -- # LSP, snippet, and autocomplete
-   use 'neovim/nvim-lspconfig'
-   use 'williamboman/mason.nvim'
-
-   use 'hrsh7th/nvim-cmp'
-   use 'hrsh7th/cmp-path'
-   use 'hrsh7th/cmp-nvim-lsp'
-   -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
-   use 'hrsh7th/cmp-cmdline'
-   -- use 'hrsh7th/cmp-cmdline'
-   -- use 'hrsh7th/cmp-buffer'
-
-   -- use { 'Issafalcon/lsp-overloads.nvim'}
-   use { 'ray-x/lsp_signature.nvim' } --, tag = "v0.2.0" }
-
-   use { "L3MON4D3/LuaSnip", tag = "v2.*" }
-   use 'saadparwaiz1/cmp_luasnip'
-
-   use 'folke/trouble.nvim'
-
-   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
-   use 'theHamsta/nvim-dap-virtual-text'
-
-   -- # Eye candy
-   use 'norcalli/nvim-colorizer.lua'
-   -- TODO
-   use { "lukas-reineke/indent-blankline.nvim", tag = "v2.*" }
-   use 'karb94/neoscroll.nvim'
-   use "b0o/incline.nvim"
-   use {
-      'nvim-lualine/lualine.nvim',
-      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-   }
-   use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-   }
-   use "olimorris/onedarkpro.nvim"
-
-   -- # Nonsense
-   use 'Eandrju/cellular-automaton.nvim'
-   use 'notomo/gesture.nvim'
-   use 'wakatime/vim-wakatime'
-
-   -- # File type specific
-   use 'folke/neodev.nvim'
-   use 'lervag/vimtex'
-   use 'frazrepo/vim-rainbow'
-   use 'simrat39/rust-tools.nvim'
-   -- use 'mattn/emmet-vim'
-   use 'tikhomirov/vim-glsl'
-   -- use 'ray-x/go.nvim'
-   use 'leoluz/nvim-dap-go'
-end,
-   config = {
-      display = {
-         open_fn = function()
-            return require('packer.util').float({ border = 'single' })
-         end
-      }
-   }
-})
-
--- # Essentials
-require('Comment').setup()
-require('nvim-surround').setup()
-
-require("nvim-tree").setup({
-   filters = {
-      dotfiles = true,
-      -- Unity meta files
-      custom = { '.\\+.meta' },
-   },
-})
 local function open_nvim_tree(data)
    -- buffer is a directory
    local directory = vim.fn.isdirectory(data.file) == 1
@@ -123,61 +16,10 @@ local function open_nvim_tree(data)
 end
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
-local all_keys = {}
-for i = ('a'):byte(), ('z'):byte() do
-   table.insert(all_keys, string.char(i))
-end
-require('which-key').setup {
-   triggers_blacklist = {
-      i = all_keys,
-      t = all_keys,
-      c = all_keys,
-   }
-}
-
-require('guess-indent').setup()
-require("symbols-outline").setup()
--- require("scrollbar").setup {
---    marks = {
---       Cursor = {
---          text = ''
---       }
---    }
--- }
 
 -- # git
-require('gitsigns').setup {
-   current_line_blame = false,
-   current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = 'right_align',
-      -- 'eol' | 'overlay' | 'right_align'
-      delay = 0,
-   },
-}
-require("scrollbar.handlers.gitsigns").setup()
-require('scrollview').setup({
-   column = 1
-})
 
 -- # lsp, snippet, and autocomplete
-require("mason").setup()
-require 'lsp_signature'.setup {
-   hint_prefix = ">> ",
-   toggle_key = '<m-k>',
-   select_signature_key = '<m-j>'
-}
-require("luasnip").setup({
-   region_check_events = 'CursorMoved',
-   delete_check_events = 'TextChanged',
-})
-require("luasnip.loaders.from_snipmate").lazy_load()
-vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-   pattern = { '*.snippets' },
-   callback = require("luasnip.loaders.from_snipmate").lazy_load,
-})
-require("dapui").setup()
-require("nvim-dap-virtual-text").setup()
 
 -- # Eye candy
 -- require('incline').setup {
@@ -188,12 +30,6 @@ require("nvim-dap-virtual-text").setup()
 --       }
 --    }
 -- }
-require('colorizer').setup()
-require("indent_blankline").setup {
-   -- for example, context is off by default, use this to turn it on
-   show_current_context = true,
-   show_current_context_start = true,
-}
 local function lualine_bool_func(fn, true_str, false_str)
    return function ()
       if fn() then
@@ -202,93 +38,9 @@ local function lualine_bool_func(fn, true_str, false_str)
       return false_str
    end
 end
-require('lualine').setup {
-   options = {
-      disabled_filetypes = {
-         'NvimTree',
-         'DiffviewFileHistory',
-         'DiffviewFiles',
-         'help',
-         statusline = {},
-         winbar = {},
-      },
-      globalstatus = true,
-      refresh = {
-         statusline = 1000,
-         tabline = 1000,
-         winbar = 1000,
-      }
-   },
-   sections = {
-      lualine_a = {
-         'mode',
-         lualine_bool_func(
-            function() return require('luasnip').jumpable(1) end,
-            '<C-L>', ''
-         ),
-         lualine_bool_func(
-            require('luasnip').expandable,
-            'snip', ''
-         ),
-      },
-      lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = {
-         {'filename', path = 1}
-      },
-      lualine_x = {
-         'encoding', 'fileformat', 'filetype',
-      },
-      lualine_y = {
-         function()
-            local names = {}
-            for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-               table.insert(names, server.name)
-            end
-            return " [" .. table.concat(names, " ") .. "]"
-         end
-      },
-      lualine_z = { 'progress', 'location' }
-   },
-   winbar = {
-      lualine_a = {
-         lualine_bool_func(
-            function() return require('luasnip').jumpable(1) end,
-            '<C-L>', ''
-         ),
-         lualine_bool_func(
-            require('luasnip').expandable,
-            'snip', ''
-         ),
-      },
-      lualine_z = { 'filename' }
-   },
-   inactive_winbar = {
-      lualine_z = { 'filename' }
-   },
-   tabline = {
-   },
-   extensions = {}
-}
-require('neoscroll').setup()
-vim.g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
-require('catppuccin').setup({
-   transparent_background = false,
-})
 
-vim.cmd 'colorscheme catppuccin'
 
 -- # File type specific
-require("rust-tools").setup({
-   server = {
-      on_attach = require('lsp').on_attach
-   },
-})
-
-require("neodev").setup({
-   -- add any options here, or leave empty to use the default settings
-})
--- require('go').setup()
-require('dap-go').setup()
 
 -- local gesture = require("gesture")
 -- vim.keymap.set("n", "<LeftDrag>", gesture.draw, { silent = true })
@@ -382,3 +134,241 @@ vim.cmd [[
 au FileType scheme call rainbow#load()
 ]]
 
+return {
+   { 'wbthomason/packer.nvim' },
+
+   -- dependency for many plugins
+   { 'nvim-lua/plenary.nvim' },
+   { 'nvim-tree/nvim-web-devicons' },
+
+   -- # Essentials
+   { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } ,
+   { 'numToStr/Comment.nvim' },
+   -- { "klen/nvim-config-local" },
+   {
+      "kylechui/nvim-surround",
+      version = "*", -- for stability; omit to use `main` branch for the latest features
+   },
+   {
+      'nvim-tree/nvim-tree.lua',
+      opts = {
+         filters = {
+            dotfiles = true,
+            -- Unity meta files
+            custom = { '.\\+.meta' },
+         },
+      },
+   },
+   {
+      'folke/which-key.nvim',
+      opts = {
+      },
+      version = '2.*.*',
+   },
+   { 'NMAC427/guess-indent.nvim' },
+
+   { 'nvim-treesitter/nvim-treesitter' },
+   { 'nvim-treesitter/nvim-treesitter-context' },
+
+   { 'simrat39/symbols-outline.nvim' },
+   -- { 'stevearc/aerial.nvim' },
+
+   {
+      'petertriho/nvim-scrollbar',
+      enabled = false,
+      config = function()
+         require("scrollbar.handlers.gitsigns").setup()
+         require("scrollbar").setup {
+             marks = {
+                 Cursor = {
+                     text = ''
+                 }
+             }
+         }
+      end
+   },
+   {
+      'dstein64/nvim-scrollview',
+      opts = {
+         column = 1
+      }
+   },
+   { 'vimwiki/vimwiki' },
+
+   -- # Git
+   { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } ,
+   {
+      'lewis6991/gitsigns.nvim',
+      opts = {
+         current_line_blame = false,
+         current_line_blame_opts = {
+            virt_text = true,
+            virt_text_pos = 'right_align',
+            -- 'eol' | 'overlay' | 'right_align'
+            delay = 0,
+         },
+      }
+   },
+   { 'tpope/vim-fugitive' },
+
+   -- # LSP, snippet, and autocomplete
+   { 'neovim/nvim-lspconfig' },
+   { 'williamboman/mason.nvim' },
+
+   { 'hrsh7th/nvim-cmp' },
+   { 'hrsh7th/cmp-path' },
+   { 'hrsh7th/cmp-nvim-lsp' },
+   -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+   { 'hrsh7th/cmp-cmdline' },
+   -- { 'hrsh7th/cmp-cmdline' },
+   -- { 'hrsh7th/cmp-buffer' },
+
+   -- { 'Issafalcon/lsp-overloads.nvim'},
+   {
+      'ray-x/lsp_signature.nvim',
+      opts = {
+         hint_prefix = ">> ",
+         toggle_key = '<m-k>',
+         select_signature_key = '<m-j>'
+      }
+   },
+
+   {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*" ,
+      opts = {
+         region_check_events = 'CursorMoved',
+         delete_check_events = 'TextChanged',
+      },
+      config = function(_, opts)
+         require('luasnip').setup(opts)
+         require("luasnip.loaders.from_snipmate").lazy_load()
+         vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+            pattern = { '*.snippets' },
+            callback = require("luasnip.loaders.from_snipmate").lazy_load,
+         })
+      end
+   },
+   { 'saadparwaiz1/cmp_luasnip' },
+
+   { 'folke/trouble.nvim' },
+
+   { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+   { 'theHamsta/nvim-dap-virtual-text' },
+
+   -- # Eye candy
+   { 'norcalli/nvim-colorizer.lua' },
+   -- TODO
+   {
+      "lukas-reineke/indent-blankline.nvim",
+      version = "v2.*",
+      opts = {
+         -- for example, context is off by default, use this to turn it on
+         show_current_context = true,
+         show_current_context_start = true,
+      }
+   },
+   { 'karb94/neoscroll.nvim' },
+   { "b0o/incline.nvim" },
+   {
+      'nvim-lualine/lualine.nvim',
+      config = function() require('lualine').setup {
+         options = {
+            disabled_filetypes = {
+               'NvimTree',
+               'DiffviewFileHistory',
+               'DiffviewFiles',
+               'help',
+               statusline = {},
+               winbar = {},
+            },
+            globalstatus = true,
+            refresh = {
+               statusline = 1000,
+               tabline = 1000,
+               winbar = 1000,
+            }
+         },
+         sections = {
+            lualine_a = {
+               'mode',
+               lualine_bool_func(
+               function() return require('luasnip').jumpable(1) end,
+               '<C-L>', ''
+               ),
+               lualine_bool_func(
+               require('luasnip').expandable,
+               'snip', ''
+               ),
+            },
+            lualine_b = { 'branch', 'diff', 'diagnostics' },
+            lualine_c = {
+               {'filename', path = 1}
+            },
+            lualine_x = {
+               'encoding', 'fileformat', 'filetype',
+            },
+            lualine_y = {
+               function()
+                  local names = {}
+                  for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+                     table.insert(names, server.name)
+                  end
+                  return " [" .. table.concat(names, " ") .. "]"
+               end
+            },
+            lualine_z = { 'progress', 'location' }
+         },
+         winbar = {
+            lualine_a = {
+               lualine_bool_func(
+               function() return require('luasnip').jumpable(1) end,
+               '<C-L>', ''
+               ),
+               lualine_bool_func(
+               require('luasnip').expandable,
+               'snip', ''
+               ),
+            },
+            lualine_z = { 'filename' }
+         },
+         inactive_winbar = {
+            lualine_z = { 'filename' }
+         },
+         tabline = {
+         },
+         extensions = {}
+      }
+   end,
+   dependencies = { 'nvim-tree/nvim-web-devicons' }
+   },
+   {
+      "catppuccin/nvim", name = "catppuccin", priority = 1000,
+      opts = { transparent_background = false }
+   },
+   { "olimorris/onedarkpro.nvim" },
+
+   -- # Nonsense
+   { 'Eandrju/cellular-automaton.nvim' },
+   { 'notomo/gesture.nvim' },
+   { 'wakatime/vim-wakatime' },
+
+   -- # File type specific
+   { 'folke/neodev.nvim' },
+   { 'lervag/vimtex' },
+   { 'frazrepo/vim-rainbow' },
+   {
+      'simrat39/rust-tools.nvim',
+      config = function()
+         require'rust-tools'.setup {
+            server = {
+               on_attach = require('lsp').on_attach
+            },
+         }
+      end
+   },
+   -- { 'mattn/emmet-vim' },
+   { 'tikhomirov/vim-glsl' },
+   -- { 'ray-x/go.nvim' },
+   { 'leoluz/nvim-dap-go' },
+}

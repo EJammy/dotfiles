@@ -7,7 +7,7 @@ local on_attach = require('lsp').on_attach
 
 local lsp_servers = {
    -- clangd = {},
-   tsserver = {},
+   ts_ls = {},
    pyright = {},
    texlab = {},
    dartls = {},
