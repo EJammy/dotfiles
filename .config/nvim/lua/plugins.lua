@@ -161,7 +161,21 @@ return {
          },
       },
    },
-   { 'folke/which-key.nvim', opts = {}, version = '2.*.*', },
+   {
+      'folke/which-key.nvim',
+      -- local wk = require('which-key')
+      ---@type wk.Opts
+      opts = {
+         win = {
+            no_overlap = false,
+         },
+         layout = {
+            width = { min = 12, max = 40 },
+            spacing = 1
+         }
+      },
+      -- version = '2.*.*'
+   },
    { 'NMAC427/guess-indent.nvim', opts = {} },
 
    { 'nvim-treesitter/nvim-treesitter' },

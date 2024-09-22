@@ -6,7 +6,6 @@ local wk = require('which-key')
 
 map_key('n', '<m-;>', ':lua =')
 map_key('n', '<m-cr>', ':lua ')
-map_key('n', '<cr>', ':lua ')
 
 map_key('n', '<c-s>', '<cmd>w<cr>')
 map_key('!', '<c-s>', '<cmd>w<cr>')
@@ -14,7 +13,7 @@ map_key('!', '<c-s>', '<cmd>w<cr>')
 map_key('', 'H', '^')
 map_key('', 'L', '$')
 
-map_key('!', 'qw', '{')
+-- map_key('!', 'qw', '{')
 -- map_key('!', 'wq', '}')
 -- map_key('!', 'qq', '(')
 -- map_key('!', 'ww', ')')
@@ -59,8 +58,9 @@ vim.g.mapleader = ' '
 local theme_opt = {'latte', 'mocha'}
 local theme_id = 1
 
-wk.register({ q = { name = 'Quick settings', {
-   c = {
+local leader_keymaps = {
+   q = { group = "Quick settings" },
+   qc = {
       function()
          theme_id = theme_id + 1
          if theme_id > #theme_opt then
@@ -70,31 +70,25 @@ wk.register({ q = { name = 'Quick settings', {
       end,
       'Toggle light mode'
    },
-   n = {
+   qn = {
       function()
          vim.o.number = not vim.o.number
-         vim.o.rnu = not vim.o.rnu
+         -- vim.o.rnu = not vim.o.rnu
       end,
       'Toggle line number'
    },
-   w = {
+   qw = {
       function() vim.o.wrap = not vim.o.wrap end,
       'Toggle wrap'
    },
-   l = {
-      name = 'LSP',
-      l = {
-         toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end, true),
-         'Toggle virtual text'
-      }
-   },
-}}}, { prefix = '<leader>' })
-
-
-local leader_keymaps = {
+   ql = { group = 'LSP', },
    qg = {
       '<cmd>Gitsigns toggle_current_line_blame<cr>',
       'Toggle Gitsigns'
+   },
+   qll = {
+      toggle_func(function(val) vim.diagnostic.config({virtual_text = val}) end, true),
+      'Toggle virtual text'
    },
 
    [' '] = '<cmd>WhichKey<cr>',
@@ -113,7 +107,7 @@ local leader_keymaps = {
    k = '<cmd>bp<cr>',
    x = '<cmd>bp|bd#<cr>',
 
-   w = { name = 'windows' },
+   w = { group = 'windows' },
    we = '<cmd>NvimTreeToggle<CR>',
    wr = '<cmd>SymbolsOutline<cr>',
 
@@ -122,22 +116,17 @@ local leader_keymaps = {
    c = { '<cmd>ccl<cr>', 'close quickfix' },
 
    -- diff
-   d = { name = 'diff' },
+   d = { group = 'diff' },
    d1 = '<cmd>diffthis<cr>',
-   d2 = '<cmd>diffthis<cr>',
+   d2 = '<cmd>diffoff<cr>',
 }
 
 for lhs, rhs in pairs(leader_keymaps) do
    if type(rhs) == 'table' then
       if rhs[1] then
-         wk.register(
-            { ['<leader>' .. lhs] = { rhs[1], rhs[2] or rhs[1] } },
-            { mode = rhs['mode'] or 'n' }
-         )
+         map_key(rhs['mode'] or '', '<leader>' .. lhs, rhs[1], { desc = rhs[2] })
       else
-         wk.register({
-            ['<leader>' .. lhs] = { name = rhs['name'] }
-         })
+         wk.add({ '<leader>' .. lhs,  group = rhs['name'] })
       end
    else
       map_key('n', '<leader>' .. lhs, rhs)
@@ -145,10 +134,8 @@ for lhs, rhs in pairs(leader_keymaps) do
 end
 
 local function map_func(mode, lhs, rhs, opts)
-   opts.mode = mode
-   wk.register({
-      [lhs] = { loadstring(rhs), rhs }
-   }, opts)
+   opts.desc = rhs
+   map_key(mode, lhs, loadstring(rhs) or error('bad'), opts)
 end
 
 function M.on_attach_keymaps(bufnr)
@@ -158,7 +145,6 @@ function M.on_attach_keymaps(bufnr)
    local bufopts = { buffer=bufnr }
    map_func('n', 'gD', 'vim.lsp.buf.declaration()', bufopts)
    map_func('n', 'gd', 'vim.lsp.buf.definition()', bufopts)
-   map_func('n', 'K', 'vim.lsp.buf.hover()', bufopts)
 
    map_func('n', 'gi', 'vim.lsp.buf.implementation()', bufopts)
 
