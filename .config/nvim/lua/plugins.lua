@@ -199,7 +199,7 @@ return {
       end
    },
    { 'dstein64/nvim-scrollview', opts = { column = 1 } },
-   { 'vimwiki/vimwiki', enabled = false },
+   { 'vimwiki/vimwiki', enabled = true },
 
    -- # Git
    { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } ,

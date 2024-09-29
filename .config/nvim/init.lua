@@ -93,6 +93,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require 'options'
 
+-- useless
+require 'plugins'
+
 -- Setup lazy.nvim
 require("lazy").setup({
    spec = {

@@ -15,8 +15,10 @@ local lsp_servers = {
    phpactor = {},
    html = {},
    cssls = {},
-   ltex = {},
+   -- ltex = {},
    -- emmet_ls = {},
+
+   jdtls = {},
    glslls = {},
    gdscript = {},
    arduino_language_server = {},
@@ -29,9 +31,9 @@ for server, _ in pairs(lsp_servers) do
    }
 end
 
-require'lspconfig'.ltex.setup {
-   filetypes = {'text'}
-}
+-- require'lspconfig'.ltex.setup {
+--    filetypes = {'text'}
+-- }
 
 require'lspconfig'.gopls.setup {
    capabilities = default_capabilities(),

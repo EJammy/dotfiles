@@ -1,4 +1,14 @@
-snippet #ife
+snippet ;ife check and return err
 	if err != nil {
 		return ${1:err}
+	}
+
+snippet ;ifer check and return
+	if err != nil {
+		return
+	}
+
+snippet ;ifef check and log fatal
+	if err != nil {
+		log.Fatal(${1:err})
 	}
