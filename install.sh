@@ -22,3 +22,4 @@ install .gitconfig
 
 install .config/_alias.sh
 install .config/alacritty.toml
+install .ssh/config

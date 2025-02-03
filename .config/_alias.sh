@@ -19,11 +19,6 @@ alias dotgit='git --work-tree=$HOME --git-dir=$HOME/.dotfiles-git'
 alias g='git'
 
 
-trash()
-{
-	# WIP
-}
-
 gitauto()
 {
 	gitcmd='git'
