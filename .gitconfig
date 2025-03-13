@@ -10,6 +10,7 @@
 	ss = status --untracked-files=no
 	fpush = push --force-with-lease
 	commit-fix = commit --amend --no-edit
+	unstage = restore --staged
 [init]
 	defaultBranch = main
 [safe]
