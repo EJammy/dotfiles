@@ -92,6 +92,10 @@ cmp.setup({
       { name = 'luasnip' },
       { name = 'nvim_lsp' },
       { name = 'lazydev' },
+      {
+         name = "dictionary",
+         -- keyword_length = 2,
+      },
       -- { name = 'nvim_lsp_signature_help' },
    }, {
       { name = 'buffer' },

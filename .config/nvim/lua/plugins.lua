@@ -228,6 +228,12 @@ return {
    { 'hrsh7th/cmp-cmdline' },
    -- { 'hrsh7th/cmp-cmdline' },
    -- { 'hrsh7th/cmp-buffer' },
+   {
+      'uga-rosa/cmp-dictionary',
+      opts = {
+         -- paths = {
+      }
+   },
 
    -- { 'Issafalcon/lsp-overloads.nvim'},
    {
@@ -317,7 +323,7 @@ return {
             lualine_y = {
                function()
                   local names = {}
-                  for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+                  for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                      table.insert(names, server.name)
                   end
                   return " [" .. table.concat(names, " ") .. "]"
@@ -359,22 +365,65 @@ return {
    { 'wakatime/vim-wakatime' },
 
    -- # File type specific
+   {
+      'martineausimon/nvim-lilypond-suite',
+      opts = {
+         lilypond = {
+            mappings = {
+               player = "<F3>",
+               compile = "<F5>",
+               open_pdf = "<F6>",
+               switch_buffers = "<F2>",
+               insert_version = "<F4>",
+               hyphenation = "<F12>",
+               hyphenation_change_lang = "<F11>",
+               insert_hyphen = "<leader>ih",
+               add_hyphen = "<leader>ah",
+               del_next_hyphen = "<leader>dh",
+               del_prev_hyphen = "<leader>dH",
+            },
+            player = {
+               mappings = {
+                  quit = "q",
+                  play_pause = "p",
+                  loop = "<A-l>",
+                  backward = "h",
+                  small_backward = "<S-h>",
+                  forward = "l",
+                  small_forward = "<S-l>",
+                  decrease_speed = "j",
+                  increase_speed = "k",
+                  halve_speed = "<S-j>",
+                  double_speed = "<S-k>"
+               },
+            },        -- edit config here (see "Customize default settings" in wiki)
+         }
+      }
+   },
    { "folke/lazydev.nvim", ft = "lua", opts = {} },
    { 'lervag/vimtex' },
    { 'frazrepo/vim-rainbow' },
-   {
-      'simrat39/rust-tools.nvim',
-      ft = 'rust',
-      config = function()
-         require'rust-tools'.setup {
-            server = {
-               on_attach = require('lsp').on_attach
-            },
-         }
-      end
-   },
+   -- {
+   --    'simrat39/rust-tools.nvim',
+   --    ft = 'rust',
+   --    config = function()
+   --       require'rust-tools'.setup {
+   --          server = {
+   --             on_attach = require('lsp').on_attach
+   --          },
+   --       }
+   --    end
+   -- },
    -- { 'mattn/emmet-vim' },
    { 'tikhomirov/vim-glsl' },
    -- { 'ray-x/go.nvim', opts = {} },
    { 'leoluz/nvim-dap-go', opts = {} },
+   {
+      'mrcjkb/rustaceanvim',
+      version = '^5', -- Recommended
+      lazy = false, -- This plugin is already lazy
+      config = function ()
+         -- vim.g.rustaceanvim = {}
+      end
+   },
 }

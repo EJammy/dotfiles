@@ -5,6 +5,13 @@ local default_capabilities = require('cmp_nvim_lsp').default_capabilities
 
 local on_attach = require('lsp').on_attach
 
+vim.g.rustaceanvim = {
+   server = {
+      status_notify_level = false,
+      on_attach = on_attach,
+   }
+}
+
 local lsp_servers = {
    -- clangd = {},
    ts_ls = {},
@@ -17,6 +24,8 @@ local lsp_servers = {
    cssls = {},
    -- ltex = {},
    -- emmet_ls = {},
+
+   verible = {},
 
    jdtls = {},
    glslls = {},
@@ -40,13 +49,21 @@ require'lspconfig'.gopls.setup {
    on_attach = on_attach,
 }
 
+-- require'lspconfig'.rust_analyzer.setup {
+--    capabilities = default_capabilities(),
+--    on_attach = on_attach,
+-- }
+
 require'lspconfig'.html.setup{
    capabilities = default_capabilities(),
    on_attach = on_attach,
    filetypes = {"html", "php"},
 }
 
+-- copy this chunk and use cmd for different compilers
+-- local on_attach = require('lsp').on_attach
 require'lspconfig'.clangd.setup {
+   -- cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
    capabilities = default_capabilities({
       snippetSupport = false,
    }),

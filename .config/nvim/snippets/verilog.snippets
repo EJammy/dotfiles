@@ -1,0 +1,12 @@
+snippet alclk
+    always @(posedge clk) begin
+        $1
+    end
+
+snippet gfor
+    genvar $2;
+    generate
+        for ($2 = 0; $2 < $3 ; $2 = $2 + 1) begin:${1:main_loop}
+            $4
+        end
+    endgenerate

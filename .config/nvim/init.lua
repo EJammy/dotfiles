@@ -160,3 +160,26 @@ vim.api.nvim_set_keymap('n', '<leader>wt', '<cmd>lua Toggle_term("toggle_term")<
 -- TODO: move me
 vim.api.nvim_create_autocmd("FileType", { pattern = "TelescopeResults", command = [[setlocal nofoldenable]] })
 -- require('guess-indent').setup()
+
+
+-- lilypond dictionary. copied from :h cmp-dictionary
+-- TODO: move
+
+vim.api.nvim_create_autocmd("BufEnter", {
+   pattern = "*",
+   callback = function(ev)
+      local dict = {
+         ft = {
+            lilypond = vim.fn.glob(vim.fn.expand('$LILYDICTPATH') .. '/*', true, true),
+         },
+      }
+
+      local paths = dict.ft[vim.bo.filetype] or {'~/.local/share/nvim/lazy/nvim-lilypond-suite/lilywords/scales'}
+      -- vim.list_extend(paths, dict["*"])
+      require("cmp_dictionary").setup({
+         paths = paths,
+         exact_length = 2,
+      })
+   end
+})
+

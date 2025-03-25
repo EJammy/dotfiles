@@ -121,6 +121,10 @@ local leader_keymaps = {
    d2 = '<cmd>diffoff<cr>',
 }
 
+for i=1,9 do
+   map_key('', '<leader>' .. tostring(i), '<F' .. tostring(i) .. '>', {remap = true})
+end
+
 for lhs, rhs in pairs(leader_keymaps) do
    if type(rhs) == 'table' then
       if rhs[1] then
