@@ -1,0 +1,20 @@
+# m h  dom mon dow   command
+
+DISPLAY=:1
+XDG_RUNTIME_DIR=/run/user/1000
+
+# 20-59/10 22 * * * notify-send --hint=string:desktop-entry:org.kde.dolphin "time to sleep" -u critical
+# */10 23 * * * notify-send --hint=string:desktop-entry:org.kde.dolphin "time to sleep" -u critical
+
+# */10 0-2 * * * notify-send --hint=string:desktop-entry:org.kde.dolphin "time to sleep" -u critical
+
+# more aggressive
+
+# 40-59/10 22 * * * loginctl lock-session 2
+# */10 23 * * * loginctl lock-session 2
+
+# */10 0-2 * * * loginctl lock-session 2
+
+# */5      23 * * 0-4 loginctl lock-session $(loginctl show-user connor -p Sessions --value) >> ~/cron-log 2>&1
+
+# * * * * * xdg-screensaver activate

@@ -5,7 +5,14 @@
 /\.minecraft/
 /_file_dump/Pictures/images/
 ^/home/[a-zA-Z\-_]+/Games/
-^/home/[a-zA-Z\-_]+/.config/heroic/
-^/home/[a-zA-Z\-_]+/.config/discord/
-^/home/[a-zA-Z\-_]+/.config/Slack/
+^/home/[a-zA-Z\-_]+/\.config/heroic/
+^/home/[a-zA-Z\-_]+/\.config/discord/
+^/home/[a-zA-Z\-_]+/\.config/Slack/
+^/home/[a-zA-Z\-_]+/\.config/google-chrome/
+^/home/[a-zA-Z\-_]+/\.wine/
+/\.rustup/
 /\.zoom/
+/\.local/share/lutris/
+/\.conda/
+/\.miniconda/
+^/home/[a-zA-Z\-_]+/miniforge3/
