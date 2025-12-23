@@ -135,8 +135,6 @@ au FileType scheme call rainbow#load()
 ]]
 
 return {
-   { 'wbthomason/packer.nvim' },
-
    -- dependency for many plugins
    { 'nvim-lua/plenary.nvim' },
    { 'nvim-tree/nvim-web-devicons' },
@@ -181,8 +179,8 @@ return {
    { 'nvim-treesitter/nvim-treesitter' },
    { 'nvim-treesitter/nvim-treesitter-context' },
 
-   { 'simrat39/symbols-outline.nvim', opts = {} },
-   -- { 'stevearc/aerial.nvim' },
+   -- { 'simrat39/symbols-outline.nvim', opts = {} },
+   { 'stevearc/aerial.nvim', opts = {} },
 
    {
       'petertriho/nvim-scrollbar',
@@ -199,7 +197,7 @@ return {
       end
    },
    { 'dstein64/nvim-scrollview', opts = { column = 1 } },
-   { 'vimwiki/vimwiki', enabled = true },
+   -- { 'vimwiki/vimwiki', enabled = true },
 
    -- # Git
    { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } ,
@@ -280,7 +278,7 @@ return {
          show_current_context_start = true,
       }
    },
-   { 'karb94/neoscroll.nvim', opts = {} },
+   { 'karb94/neoscroll.nvim', opts = {}, enabled = false },
    { "b0o/incline.nvim" },
    {
       'nvim-lualine/lualine.nvim',
@@ -364,6 +362,41 @@ return {
    { 'notomo/gesture.nvim' },
    { 'wakatime/vim-wakatime' },
 
+   -- # AI
+   {
+      "olimorris/codecompanion.nvim",
+      opts = {
+         strategies = {
+            chat = {
+               adapter = "gemini_cli",
+            },
+            inline = {
+               adapter = "gemini_cli",
+            },
+            cmd = {
+               adapter = "gemini_cli",
+            }
+         },
+         adapters = {
+            acp = {
+               gemini_cli = function()
+                  return require("codecompanion.adapters").extend("gemini_cli", {
+                     defaults = {
+                        auth_method = "oauth-personal", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
+                     },
+                     -- env = {
+                        --    GEMINI_API_KEY = "cmd:op read op://personal/Gemini_API/credential --no-newline",
+                        -- },
+                     })
+                  end,
+               },
+            },
+      },
+      dependencies = {
+         "nvim-lua/plenary.nvim",
+      },
+   },
+
    -- # File type specific
    {
       'martineausimon/nvim-lilypond-suite',
@@ -415,7 +448,7 @@ return {
    --    end
    -- },
    -- { 'mattn/emmet-vim' },
-   { 'tikhomirov/vim-glsl' },
+   -- { 'tikhomirov/vim-glsl' },
    -- { 'ray-x/go.nvim', opts = {} },
    { 'leoluz/nvim-dap-go', opts = {} },
    {

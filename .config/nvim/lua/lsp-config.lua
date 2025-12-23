@@ -31,46 +31,49 @@ local lsp_servers = {
    glslls = {},
    gdscript = {},
    arduino_language_server = {},
+   gopls = {},
 }
 
+vim.lsp.config('*', {
+   capabilities = default_capabilities(),
+   on_attach = on_attach
+})
+
 for server, _ in pairs(lsp_servers) do
-   require('lspconfig')[server].setup {
+   vim.lsp.config(server, {
       capabilities = default_capabilities(),
       on_attach = on_attach
-   }
+   })
+   vim.lsp.enable(server)
 end
 
 -- require'lspconfig'.ltex.setup {
 --    filetypes = {'text'}
 -- }
 
-require'lspconfig'.gopls.setup {
-   capabilities = default_capabilities(),
-   on_attach = on_attach,
-}
-
 -- require'lspconfig'.rust_analyzer.setup {
 --    capabilities = default_capabilities(),
 --    on_attach = on_attach,
 -- }
 
-require'lspconfig'.html.setup{
-   capabilities = default_capabilities(),
-   on_attach = on_attach,
+vim.lsp.config('html', {
    filetypes = {"html", "php"},
-}
+})
+vim.lsp.enable('html')
 
 -- copy this chunk and use cmd for different compilers
 -- local on_attach = require('lsp').on_attach
-require'lspconfig'.clangd.setup {
-   -- cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
-   capabilities = default_capabilities({
-      snippetSupport = false,
-   }),
+vim.lsp.config('clangd', {
+   capabilities = default_capabilities(),
    on_attach = on_attach
-}
+   -- cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
+   -- capabilities = default_capabilities({
+   --    snippetSupport = false,
+   -- }),
+})
+vim.lsp.enable('clangd')
 
-require'lspconfig'.lua_ls.setup {
+vim.lsp.config('lua_ls', {
    on_attach = on_attach,
    capabilities = default_capabilities(),
    settings = {
@@ -92,12 +95,14 @@ require'lspconfig'.lua_ls.setup {
          },
          -- Do not send telemetry data containing a randomized but unique identifier
          telemetry = {
-            enable = false,
+            enable = true,
          },
       },
    },
-}
+})
+vim.lsp.enable('lua_ls')
 
+--[[
 -- lsp from aur didn't work :(
 require'lspconfig'.omnisharp.setup {
    capabilities = default_capabilities(),
@@ -146,4 +151,4 @@ require'lspconfig'.omnisharp.setup {
    --     monoPath = "/usr/bin/mono"
    -- }
 }
-
+]]--

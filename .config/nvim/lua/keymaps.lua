@@ -109,7 +109,7 @@ local leader_keymaps = {
 
    w = { group = 'windows' },
    we = '<cmd>NvimTreeToggle<CR>',
-   wr = '<cmd>SymbolsOutline<cr>',
+   wr = '<cmd>AerialToggle<CR>',
 
    h = { '<cmd>nohls<cr>', 'clear highlights' },
 
