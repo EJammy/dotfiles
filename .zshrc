@@ -9,8 +9,8 @@ fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=4000
-SAVEHIST=20000
+HISTSIZE=40000
+SAVEHIST=200000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -51,3 +51,8 @@ source ~/.config/_alias.sh
 
 # nonsense
 # fortune | cowsay -f $(ls /usr/share/cows/*.cow | shuf -n1) | lolcat      
+
+
+# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# eval "$(/home/connor/miniforge3/bin/conda shell.zsh hook)" 
