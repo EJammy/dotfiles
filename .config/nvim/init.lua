@@ -21,6 +21,8 @@
 -- startup screen
 -- check gh stars
 -- buffer line
+--
+-- https://vi.stackexchange.com/questions/37421/how-to-remove-neovim-trailing-white-space
 
 -- https://github.com/nanotee/nvim-lua-guide
 -- TOC?
