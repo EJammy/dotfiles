@@ -18,6 +18,7 @@ install .zshenv
 install .bashrc
 install .config/nvim
 install .config/systemd/user/_rclone-mount.service
+install .config/pip
 install .gitconfig
 
 install .config/_alias.sh
