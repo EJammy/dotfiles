@@ -65,7 +65,7 @@ vim.lsp.enable('html')
 -- local on_attach = require('lsp').on_attach
 vim.lsp.config('clangd', {
    capabilities = default_capabilities(),
-   on_attach = on_attach
+   on_attach = on_attach,
    -- cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
    -- capabilities = default_capabilities({
    --    snippetSupport = false,

@@ -32,10 +32,10 @@ map_key('', 'L', '$')
 map_key('', '<c-n>', '@="5j"<cr>', { silent = true })
 map_key('', '<c-p>', '@="5k"<cr>', { silent = true })
 
-map_key('', '<c-_>', '<plug>(comment_toggle_linewise_current)')
-map_key('v', '<c-_>', '<plug>(comment_toggle_linewise_visual)')
-map_key('', '<c-/>', '<plug>(comment_toggle_linewise_current)')
-map_key('v', '<c-/>', '<plug>(comment_toggle_linewise_visual)')
+map_key('', '<c-_>', 'gcc', { remap = true })
+map_key('v', '<c-_>', 'gc', { remap = true })
+map_key('', '<c-/>', 'gcc', { remap = true })
+map_key('v', '<c-/>', 'gc', { remap = true })
 
 -- remapping tab in normal mode
 -- map_key('n', '<m-o>', '<c-o>', {})

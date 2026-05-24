@@ -140,8 +140,7 @@ return {
    { 'nvim-tree/nvim-web-devicons' },
 
    -- # Essentials
-   { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } ,
-   { 'numToStr/Comment.nvim', opts = {} },
+   { 'nvim-telescope/telescope.nvim', version = '*' } ,
    -- { "klen/nvim-config-local" },
    {
       "kylechui/nvim-surround",
