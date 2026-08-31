@@ -154,7 +154,7 @@ return {
          filters = {
             dotfiles = true,
             -- Unity meta files
-            custom = { '.\\+.meta' },
+            custom = { '.\\+.meta$' },
          },
       },
    },
@@ -173,9 +173,13 @@ return {
       },
       -- version = '2.*.*'
    },
-   { 'NMAC427/guess-indent.nvim', opts = {} },
+   { 'NMAC427/guess-indent.nvim', opts = {}, pin = true },
 
-   { 'nvim-treesitter/nvim-treesitter' },
+   {
+      'nvim-treesitter/nvim-treesitter',
+      lazy = false,
+      build = ':TSUpdate'
+   },
    { 'nvim-treesitter/nvim-treesitter-context' },
 
    -- { 'simrat39/symbols-outline.nvim', opts = {} },
@@ -184,6 +188,7 @@ return {
    {
       'petertriho/nvim-scrollbar',
       enabled = false,
+      pin = true,
       config = function()
          require("scrollbar").setup {
             marks = {
@@ -195,7 +200,7 @@ return {
          require("scrollbar.handlers.gitsigns").setup()
       end
    },
-   { 'dstein64/nvim-scrollview', opts = { column = 1 } },
+   { 'dstein64/nvim-scrollview', opts = { column = 1 }, pin = true },
    -- { 'vimwiki/vimwiki', enabled = true },
 
    -- # Git
@@ -270,12 +275,9 @@ return {
    -- TODO
    {
       "lukas-reineke/indent-blankline.nvim",
-      version = "v2.*",
-      opts = {
-         -- for example, context is off by default, use this to turn it on
-         show_current_context = true,
-         show_current_context_start = true,
-      }
+      version = "v3.*",
+      main = "ibl",
+      opts = {}
    },
    { 'karb94/neoscroll.nvim', opts = {}, enabled = false },
    { "b0o/incline.nvim" },
@@ -365,15 +367,15 @@ return {
    {
       "olimorris/codecompanion.nvim",
       opts = {
-         strategies = {
+         interactions = {
             chat = {
-               adapter = "gemini_cli",
+               adapter = 'deepseek'
             },
             inline = {
-               adapter = "gemini_cli",
+               adapter = 'deepseek'
             },
             cmd = {
-               adapter = "gemini_cli",
+               adapter = 'deepseek'
             }
          },
          adapters = {

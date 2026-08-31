@@ -6,3 +6,5 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export MAKEFLAGS="--jobs=$(nproc)"
+
+[[ -f ~/.config/secrets.sh ]] && source ~/.config/secrets.sh
