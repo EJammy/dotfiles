@@ -240,6 +240,7 @@ return {
    -- { 'Issafalcon/lsp-overloads.nvim'},
    {
       'ray-x/lsp_signature.nvim',
+      -- enabled = false,
       opts = {
          hint_prefix = ">> ",
          toggle_key = '<m-k>',
@@ -398,7 +399,19 @@ return {
       },
    },
 
-   -- # File type specific
+   -- # Filetype specific
+
+   -- Markdown
+   { 'brianhuster/live-preview.nvim', },
+   {
+      'MeanderingProgrammer/render-markdown.nvim',
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+      -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+      ---@module 'render-markdown'
+      ---@type render.md.UserConfig
+      opts = {},
+   },
    {
       'martineausimon/nvim-lilypond-suite',
       opts = {
@@ -434,7 +447,15 @@ return {
          }
       }
    },
-   { "folke/lazydev.nvim", ft = "lua", opts = {} },
+   {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+         enabled = function(root_dir)
+            return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+         end,
+      }
+   },
    { 'lervag/vimtex' },
    { 'frazrepo/vim-rainbow' },
    -- {

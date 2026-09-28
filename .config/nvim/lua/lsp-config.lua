@@ -15,7 +15,6 @@ vim.g.rustaceanvim = {
 local lsp_servers = {
    -- clangd = {},
    ts_ls = {},
-   pyright = {},
    texlab = {},
    dartls = {},
    jsonls = {},
@@ -39,11 +38,21 @@ vim.lsp.config('*', {
    on_attach = on_attach
 })
 
+vim.lsp.config('pyright', {
+   before_init = function (_, config)
+      local util = require('lspconfig/util')
+      local path = util.path
+      local venv_path = path.join('.venv', 'bin', 'python')
+      vim.notify('Using python at ' .. venv_path)
+      if vim.uv.fs_stat(venv_path) then
+         config.settings.python.pythonPath = venv_path
+      end
+   end
+})
+vim.lsp.enable('pyright')
+vim.lsp.enable('ruff')
+
 for server, _ in pairs(lsp_servers) do
-   vim.lsp.config(server, {
-      capabilities = default_capabilities(),
-      on_attach = on_attach
-   })
    vim.lsp.enable(server)
 end
 
@@ -62,15 +71,13 @@ vim.lsp.config('html', {
 vim.lsp.enable('html')
 
 -- copy this chunk and use cmd for different compilers
--- local on_attach = require('lsp').on_attach
-vim.lsp.config('clangd', {
-   capabilities = default_capabilities(),
-   on_attach = on_attach,
-   -- cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
-   -- capabilities = default_capabilities({
-   --    snippetSupport = false,
-   -- }),
-})
+-- vim.lsp.config('clangd', {
+--    cmd = {'clangd', '--query-driver', '/usr/bin/riscv64-unknown-elf-gcc'},
+--    capabilities = default_capabilities({
+--       snippetSupport = false,
+--    }),
+-- })
+
 vim.lsp.enable('clangd')
 
 vim.lsp.config('lua_ls', {
