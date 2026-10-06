@@ -40,13 +40,14 @@ vim.lsp.config('*', {
 
 vim.lsp.config('pyright', {
    before_init = function (_, config)
-      local util = require('lspconfig/util')
-      local path = util.path
-      local venv_path = path.join('.venv', 'bin', 'python')
-      vim.notify('Using python at ' .. venv_path)
-      if vim.uv.fs_stat(venv_path) then
-         config.settings.python.pythonPath = venv_path
-      end
+      config.settings.python.pythonPath = vim.fn.exepath('uv') and vim.fn.systemlist('uv python find')[1]
+      -- local util = require('lspconfig/util')
+      -- local path = util.path
+      -- local venv_path = path.join(vim.fn.getcwd(), '.venv')
+      -- if vim.uv.fs_stat(venv_path) then
+      --    vim.notify('Using python venv at ' .. venv_path)
+      --    config.settings.python.pythonPath = path.join(venv_path, 'bin', 'python')
+      -- end
    end
 })
 vim.lsp.enable('pyright')

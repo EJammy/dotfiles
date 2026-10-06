@@ -42,6 +42,9 @@ bindkey '^x^e' edit-command-line
 
 
 source ~/.config/_alias.sh
+
+command -v goose >/dev/null && eval "$(goose completion zsh)"
+
 # eval "$(starship init zsh)"
 
 # TODO: detect terminal and switch prompt accordingly

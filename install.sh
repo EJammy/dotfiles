@@ -21,6 +21,9 @@ install .config/systemd/user/_rclone-mount.service
 install .config/pip
 install .gitconfig
 
+install .config/AGENTS.md
+install .config/goose/AGENTS.md
+
 install .config/_alias.sh
 install .config/alacritty.toml
 install .ssh/config
