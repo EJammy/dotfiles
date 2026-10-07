@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 
 install() {
 	# use the second argument, if it exists
@@ -9,7 +10,7 @@ install() {
 		if [[ -e $target ]]; then
 			mv -vi "$target" "$target".bak
 		fi
-		ln -svi "$HOME"/dotfiles/"$1" "$target"
+		ln -svi "$SCRIPT_DIR/$1" "$target"
 	fi
 }
 
@@ -23,6 +24,7 @@ install .gitconfig
 
 install .config/AGENTS.md
 install .config/goose/AGENTS.md
+install .claude/CLAUDE.md
 
 install .config/_alias.sh
 install .config/alacritty.toml

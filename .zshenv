@@ -5,6 +5,10 @@ export EDITOR="nvim"
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export MAKEFLAGS="--jobs=$(nproc)"
+if (( $+commands[nproc] )); then
+  export MAKEFLAGS="--jobs=$(nproc)"
+elif [[ -x /usr/sbin/sysctl ]]; then
+  export MAKEFLAGS="--jobs=$(/usr/sbin/sysctl -n hw.ncpu)"
+fi
 
 [[ -f ~/.config/secrets.sh ]] && source ~/.config/secrets.sh
