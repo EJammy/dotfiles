@@ -7,9 +7,10 @@
     "blockReadsOutsideWorkingDirectories": true
   },
   "sandbox": {
+    "enabled": true,
     "allowUnsandboxedCommands": false,
     "filesystem": {
-      "allowRead": ["~/.local/share/uv", "~/.cache/uv"],
+      "allowRead": ["~/.local/share/uv", "~/.cache/uv", "~/.config/git"],
       "allowWrite": ["~/.cache/uv"] 
     }
   }

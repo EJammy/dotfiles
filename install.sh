@@ -20,7 +20,7 @@ install .bashrc
 install .config/nvim
 install .config/systemd/user/_rclone-mount.service
 install .config/pip
-install .gitconfig
+install .config/git/config
 
 install .config/AGENTS.md
 install .config/goose/AGENTS.md
