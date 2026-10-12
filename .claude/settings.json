@@ -1,0 +1,16 @@
+{
+  "theme": "dark",
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "permissions": {
+    "blockReadsOutsideWorkingDirectories": true
+  },
+  "sandbox": {
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "allowRead": ["~/.local/share/uv", "~/.cache/uv"],
+      "allowWrite": ["~/.cache/uv"] 
+    }
+  }
+}

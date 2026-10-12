@@ -50,3 +50,4 @@ add-alias()
 
 alias venv-start="source .venv/bin/activate"
 alias py="python"
+alias nvim-secure="nvim --noplugin -u ~/.config/nvim/secure.lua"

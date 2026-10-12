@@ -25,6 +25,7 @@ install .gitconfig
 install .config/AGENTS.md
 install .config/goose/AGENTS.md
 install .claude/CLAUDE.md
+install .claude/settings.json
 
 install .config/_alias.sh
 install .config/alacritty.toml
